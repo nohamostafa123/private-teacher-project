@@ -43,7 +43,11 @@ export default function ContactUs() {
             <div className="info_block col-lg-4 col-md-6 col-xs-12">
               <span className="fa fa-envelope"></span>
               <div className="text">
+<<<<<<< HEAD
                 <h2> E-mail</h2>
+=======
+                <h2>البريد الألكتروني</h2>
+>>>>>>> 863d84057840f41d0bbb9e26f85951cf758d186d
                 <h3>info@tqniait.com</h3>
                 <h3>info@tqniait.com</h3>
               </div>
@@ -66,6 +70,7 @@ export default function ContactUs() {
               </div>
             </div>
             
+<<<<<<< HEAD
           </div>
         </div>
       
@@ -124,3 +129,63 @@ export default function ContactUs() {
     </section>
   );
 }
+=======
+          </div>
+        </div>
+      
+
+      <div className="container-fluid contact_form mt-5 ">
+        <div className="container-fluid ">
+          <div className="title m-">
+            <h1>أبقى على تواصل معنا</h1>
+            <h3>أكتب رسالة : </h3>
+            <hr />
+          </div>
+
+          <div className="container-fluid  row mt-5 justify-content-between ">
+            <div className="col-md-6 col-xs-12 col-sm-12 ">
+              <form className="row gy-2 mb-5">
+                <div className="col-md-6">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    placeholder="الأسم"
+                  />
+                </div>
+                <div className="col-md-6">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="email"
+                    placeholder="البريد أو الهاتف"
+                  />
+                </div>
+                <div className="col-12">
+                  <textarea
+                    className="form-control"
+                    id="message"
+                    rows="2"
+                    placeholder="الرسالة"
+                  ></textarea>
+                </div>
+                <div className="col-12">
+                  <button type="submit" className="btn btn-primary">
+                    إرسال
+                  </button>
+                </div>
+              </form>
+            </div>
+
+              <div className="col-md-12 col-xs-12 col-sm-12">
+                {/* Map container */}
+                <div id="map" style={{ height: "400px" }}></div>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+>>>>>>> 863d84057840f41d0bbb9e26f85951cf758d186d

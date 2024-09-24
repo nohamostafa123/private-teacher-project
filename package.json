@@ -22,7 +22,11 @@
     "react-owl-carousel": "^2.3.3",
     "react-router-dom": "^6.26.2",
     "react-scripts": "5.0.1",
+<<<<<<< HEAD
     "sweetalert2": "^11.14.1",
+=======
+    "sass": "^1.79.3",
+>>>>>>> 863d84057840f41d0bbb9e26f85951cf758d186d
     "web-vitals": "^2.1.4"
   },
   "scripts": {
