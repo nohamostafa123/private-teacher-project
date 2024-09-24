@@ -1,9 +1,5 @@
 * {
-<<<<<<< HEAD
     /* direction: rtl; */
-=======
-    direction: rtl;
->>>>>>> 863d84057840f41d0bbb9e26f85951cf758d186d
     font-family: "BahijBold";
 }
 
@@ -53,11 +49,7 @@
 
 .contact .info .row .info_block .text {
     font-family: "BahijBold" !important;
-<<<<<<< HEAD
     margin-left: 15px;
-=======
-    margin-right: 20px;
->>>>>>> 863d84057840f41d0bbb9e26f85951cf758d186d
 }
 
 .contact .info .row .info_block .text h2,
@@ -138,7 +130,6 @@
 
 .contact .contact_form .title h1,
 .contact .contact_form .title h3 {
-<<<<<<< HEAD
     text-align: left;
     margin-left: 20px;
 }
@@ -150,9 +141,6 @@
 .contact .contact_form .title h3{
     font-size: 19px;
     color: rgb(112, 112, 112);
-=======
-    text-align: right;
->>>>>>> 863d84057840f41d0bbb9e26f85951cf758d186d
 }
 
 .contact .contact_form .title hr {
@@ -163,18 +151,11 @@
     background-color: #001ac2;
     width: 150px;
     opacity: 1;
-<<<<<<< HEAD
  
 }
 
 
 
-=======
-
-
-}
-
->>>>>>> 863d84057840f41d0bbb9e26f85951cf758d186d
 input {
     border: 1px solid var(--custom-border-color);
     width: 100%;
