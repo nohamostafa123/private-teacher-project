@@ -93,7 +93,8 @@ font-size: 10px;
     background-color: rgb(255 255 255 / 8%);
     font-size: 14px;
     color: #fff;
-    padding-right: 45px;
+    /* padding-right: 45px; */
+    padding-left: 45px;
 
     
 }
@@ -102,7 +103,7 @@ font-size: 10px;
     color: #fff;
     position: absolute;
     top: 50%;
-    right: 15px;
+    left: 15px;
     transform: translateY(-50%);
 }
 
@@ -111,9 +112,15 @@ font-size: 10px;
     width: 15px;
     padding: 0;
     border-radius: 50%;
-    margin-left: 10px;
+    margin-left: 5px;
+    border: 1px solid #E9E9E9;
     
 }
+.sign_content form .form-group label {
+   display: flex;
+   gap: 10px;
+}
+
 .sign_content form .form-group input[type="checkbox"]:checked {
     background-color: #03519C;
     border: 3px solid #E9E9E9;
@@ -164,6 +171,7 @@ font-size: 10px;
             
   
 }
+
 .btn-group-toggle .btn.student-btn {   
     border-left: none; 
     /* border-top-right-radius: 15px; 
@@ -235,6 +243,13 @@ input[type="radio"] {
     padding-right: 45px;
     border: none;
 }
+.sign_content .form-group .btn:hover{
+
+    background: #fff;
+
+    color: #03519C;
+  
+}
 
 .sign_content input::-webkit-input-placeholder{
 color: #fff !important;
@@ -274,4 +289,19 @@ color: #fff !important;
 /* ===================================CONTACT US===================================== */
 
 
-
+/* Add these styles in your style.css file */
+select.form-control {
+    color: black; /* Default text color for the selected option */
+    background-color: white; /* Background color of the select */
+  }
+  
+  select.form-control option {
+    color: black; /* Text color for all options */
+    background-color: white; /* Background color for options */
+  }
+  
+  /* You can also add hover effects if needed */
+  select.form-control option:hover {
+    background-color: #f1f1f1; /* Light background on hover */
+  }
+  

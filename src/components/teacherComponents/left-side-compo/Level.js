@@ -4,16 +4,16 @@ import { Card, Form, ListGroup } from 'react-bootstrap';
 
 function Levels() {
     const levels = [
-        { label: "جميع المستويات", count: 823 },
-        { label: "مبتدئ", count: 11 },
-        { label: "متوسط", count: 27 },
-        { label: "محترف", count: 234 }
+        { label: " All levels ", count: 823 },
+        { label: " junior", count: 11 },
+        { label: " middle", count: 27 },
+        { label: " senior", count: 234 }
     ];
 
     return (
         <Card className="border-1 mb-4 px-3 py-4">
             <Card.Body>
-                <h5 className="card-title text-end">المستوى</h5>
+                <h5 className="card-title text-end">The Level</h5>
                 <div className="underline bg-primary mb-4 ms-auto"></div>
                 <ListGroup variant="flush" className="list d-flex flex-row-reverse text-end">
                     <ul className="list-unstyled w-100">

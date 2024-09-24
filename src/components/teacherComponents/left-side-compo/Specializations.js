@@ -4,24 +4,25 @@ import { Card, Form, ListGroup } from 'react-bootstrap';
 
 function Specializations() {
     const specializations = [
-        { label: "الأحياء", count: 69 },
-        { label: "التاريخ", count: 12 },
-        { label: "الجغرافيا", count: 7 },
-        { label: "الرياضيات", count: 234 },
-        { label: "العلوم", count: 53 },
-        { label: "الفلسفة", count: 3 },
-        { label: "الفيزياء", count: 69 },
-        { label: "الكيمياء", count: 79 },
-        { label: "اللغة الإنجليزية", count: 161 },
-        { label: "اللغة الفرنسية", count: 23 },
-        { label: "اللغة العربية", count: 108 },
-        { label: "علم النفس", count: 12 }
+        { label: " Arabic", count: 108 },
+        { label: "Biology", count: 69 },
+        { label: "Chemistry", count: 79 },
+        { label: "English", count: 161 },
+        { label: "French ", count: 23 },
+        { label: "geography", count: 7 },
+        { label: "History", count: 12 },
+        { label: "Math", count: 234 },
+        { label: "Philosophy", count: 3 },
+        { label: "Physics", count: 69 },
+        { label: " Psychology", count: 12 },
+        { label: " Science", count: 53 }
+    
     ];
 
     return (
         <Card className="border-1 mb-3 px-3 py-4">
             <Card.Body>
-                <h5 className="card-title text-end">التخصصات</h5>
+                <h5 className="card-title text-end">Majors</h5>
                 <div className="underline bg-primary mb-4 ms-auto"></div>
                 <ListGroup variant="flush" className="list d-flex flex-row-reverse text-end">
                     <ul className="list-unstyled w-100">

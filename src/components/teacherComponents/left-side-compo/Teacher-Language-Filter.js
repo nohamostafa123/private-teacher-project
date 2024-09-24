@@ -8,14 +8,15 @@ function TeacherLanguageFilter() {
     return (
         <Card className="border-1 mb-4 px-3 py-4">
             <Card.Body>
-                <h5 className="card-title text-end">لغة المعلم</h5>
+                <h5 className="card-title text-end"> Language teacher
+                </h5>
                 <div className="underline bg-primary mb-4 ms-auto"></div>
                 <div className="input-group mb-3">
                     <span className="input-group-text bg-transparent border-0">
                         <FontAwesomeIcon icon={faGlobe} className="text-muted" />
                     </span>
                     <Form.Select className="border-0 py-3 text-end" style={{ fontFamily: 'Tajawal, sans-serif' }}>
-                        <option selected>كل اللغات</option>
+                        <option selected>All Languages </option>
                         <option>English</option>
                         <option>اللغة العربية</option>
                     </Form.Select>

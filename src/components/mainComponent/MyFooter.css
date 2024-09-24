@@ -71,6 +71,11 @@ footer .footer_top .title:after {
 footer .footer_top ul.links{
     /* list-style: none; */
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 1px;
+   
 }
 footer .footer_top ul.links li a{
     text-decoration: none;
@@ -80,6 +85,7 @@ footer .footer_top ul.links li a{
     margin-bottom: 20px;
     display: table;
     transition: all .3s;
+   
 }
 footer .footer_top ul.links li::marker{
     color: rgb(1 19 147 / 0.4);
@@ -175,8 +181,9 @@ footer .toTop a img{
     max-width: 100%;
 }
 footer .hidden-lg{display: none;}
- 
+
 .accordion {
+    direction: rtl;
     margin-right: -15px;
     width: calc(100% + 30px);
     list-style: none;
@@ -233,7 +240,7 @@ footer .hidden-lg{display: none;}
 
 .accordion li.open .row {
     display: block;
-}
+} 
 
  /* Footer Section End*/
 
@@ -241,7 +248,7 @@ footer .hidden-lg{display: none;}
   /* Responsive Footer Section */
 
 
-
+ 
 
 @media (max-width:1200px) {
 
@@ -367,7 +374,14 @@ footer .hidden-lg{display: none;}
 
 
 
-}
+} 
 
 
    /* Responsive Footer Section End*/
+
+
+   /* Align title and links in the same column */
+
+
+
+   

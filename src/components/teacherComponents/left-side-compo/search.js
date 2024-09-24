@@ -5,7 +5,8 @@ function Search() {
     return (
         <Card className="border-1 mb-4 px-3 py-4">
             <Card.Body>
-                <h5 className="card-title text-end">بحث</h5>
+                <h5 className="card-title text-end">Search
+                </h5>
                 <div className="underline bg-primary mb-4 ms-auto"></div>
                 <InputGroup className="mb-3">
                     <InputGroup.Text className="bg-transparent border-0 cursor-pointer">
@@ -14,7 +15,7 @@ function Search() {
                     <FormControl
                         type="text"
                         className="border-0 py-3 text-end"
-                        placeholder="اكتب محتوى البحث هنا"
+                        placeholder=" Type your search content here"
                         style={{ fontFamily: 'Tajawal, sans-serif' }}
                     />
                 </InputGroup>

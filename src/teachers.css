@@ -1,9 +1,9 @@
-body {
+/* body {
   background-color: #fdfdfd;
   font-family: "Roboto", sans-serif;
   margin: 0;
   padding: 0;
-}
+} */
 
 /* Apply Tajawal for Arabic text */
 h5,
@@ -141,7 +141,7 @@ ul {
 }
 
 li {
-  direction: ltr;
+  /* direction: ltr; */
   margin-bottom: 10px;
   display: flex;
   align-items: center;

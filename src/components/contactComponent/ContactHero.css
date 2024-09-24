@@ -1,5 +1,5 @@
 .hh img {
-    background-size: cover;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-color: rgba(0, 2, 14, 0.85) !important;
@@ -7,6 +7,7 @@
   height: 450px;
   /* padding: 80px 60px; */
 }
+
 .about-section {
   margin-top: 30px;
   text-align: center;
@@ -19,20 +20,25 @@
 }
 
 .ull {
-    display: flex;
-    justify-content: center;  /* Horizontally centers the items */
-    align-items: center;      /* Vertically aligns the items */
-    list-style: none;
-    padding: 0;
-    margin: 0 auto;           /* Ensures the list is centered in its container */
-    flex-wrap: wrap;          /* Ensures items wrap on smaller screens */
-    width: 100%;
-    max-width: 100%;
- 
+  display: flex;
+  justify-content: center;
+  /* Horizontally centers the items */
+  align-items: center;
+  /* Vertically aligns the items */
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  /* Ensures the list is centered in its container */
+  flex-wrap: wrap;
+  /* Ensures items wrap on smaller screens */
+  width: 100%;
+  max-width: 100%;
+
 }
 
 .lii {
-    margin: 0 10px; /* Optional spacing between list items */
+  margin: 0 10px;
+  /* Optional spacing between list items */
 }
 
 .aa {
@@ -54,16 +60,20 @@
   width: 8px;
   margin: 0 8px;
 }
+
 @media (max-width: 768px) {
-    .ull {
-      flex-direction: column;  /* Stack items vertically on smaller screens */
-    }
-  
-    .lii {
-      margin-bottom: 10px;  /* Add spacing between vertically stacked items */
-    }
-  
-    .dot {
-      margin: 0 0 8px 0; /* Adjust dot spacing for vertical alignment */
-    }
+  .ull {
+    flex-direction: column;
+    /* Stack items vertically on smaller screens */
   }
+
+  .lii {
+    margin-bottom: 10px;
+    /* Add spacing between vertically stacked items */
+  }
+
+  .dot {
+    margin: 0 0 8px 0;
+    /* Adjust dot spacing for vertical alignment */
+  }
+}

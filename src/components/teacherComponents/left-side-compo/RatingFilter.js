@@ -17,7 +17,8 @@ function RatingFilter() {
     return (
         <Card className="border-1 mb-4 px-3 py-4">
             <Card.Body>
-                <h5 className="card-title text-end">التصفية حسب التقييم</h5>
+                <h5 className="card-title text-end">  Filter by rating
+                </h5>
                 <div className="underline bg-primary mb-4 ms-auto"></div>
                 <ListGroup variant="flush" className="list d-flex flex-row-reverse text-end">
                     <ul className="list-unstyled w-100">
