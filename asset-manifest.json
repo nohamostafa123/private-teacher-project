@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/private-teacher-project/static/css/main.d17d5b92.css",
+    "main.js": "/private-teacher-project/static/js/main.8c94447e.js",
+    "static/media/sign_bg.png": "/private-teacher-project/static/media/sign_bg.afacf7d82ab94a69c953.png",
+    "static/media/fa-solid-900.ttf": "/private-teacher-project/static/media/fa-solid-900.07ed6d5fa32c1d54af0f.ttf",
+    "static/media/Bahij_TheSansArabic-Plain.ttf": "/private-teacher-project/static/media/Bahij_TheSansArabic-Plain.aefc305703c5725c3567.ttf",
+    "static/media/fa-brands-400.ttf": "/private-teacher-project/static/media/fa-brands-400.0ff70dcbf135d859ebf3.ttf",
+    "static/media/fa-solid-900.woff2": "/private-teacher-project/static/media/fa-solid-900.93f719f4d62bfa3e748c.woff2",
+    "static/media/fa-brands-400.woff2": "/private-teacher-project/static/media/fa-brands-400.bb8d5a145e22822103fb.woff2",
+    "static/media/fa-regular-400.ttf": "/private-teacher-project/static/media/fa-regular-400.17a6e1aebccdbaa39e78.ttf",
+    "static/media/fa-regular-400.woff2": "/private-teacher-project/static/media/fa-regular-400.bc3722686635b5f86132.woff2",
+    "static/media/fa-v4compatibility.ttf": "/private-teacher-project/static/media/fa-v4compatibility.0f6cb412603527bda691.ttf",
+    "static/media/fa-v4compatibility.woff2": "/private-teacher-project/static/media/fa-v4compatibility.6cfec8414be20e2c3426.woff2",
+    "index.html": "/private-teacher-project/index.html",
+    "main.d17d5b92.css.map": "/private-teacher-project/static/css/main.d17d5b92.css.map",
+    "main.8c94447e.js.map": "/private-teacher-project/static/js/main.8c94447e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d17d5b92.css",
+    "static/js/main.8c94447e.js"
+  ]
+}
