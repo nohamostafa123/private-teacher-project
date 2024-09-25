@@ -1,7 +1,7 @@
 {
   "name": "my-app",
   "version": "0.1.0",
-  "homepage": "https://nohamostafa123.github.io/private-teacher-project",
+ 
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
