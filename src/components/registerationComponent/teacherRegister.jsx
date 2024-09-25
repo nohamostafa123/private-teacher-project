@@ -122,8 +122,8 @@ export default function TeacherRegister() {
                 value={formData.subject_id}
                 onChange={handleInputChange}
               >
-                <option disabled value="">
-                  اختار اسم المادة 
+                <option disabled value="" >
+                  اختار اسم المادة
                 </option>
                 <option value="2" style={{ backgroundColor: '#1B62A4' }}>
                   Arabic

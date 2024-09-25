@@ -84,6 +84,10 @@ font-size: 10px;
     left: -130px;
     transform: translateY(-50%);
 }
+/* .sign_content .form-group input{
+    border-color: #e2e2e24f;   
+} */
+
 .sign_content .form-group{
     position: relative;
     margin-bottom: 25px;
@@ -95,8 +99,7 @@ font-size: 10px;
     color: #fff;
     /* padding-right: 45px; */
     padding-left: 45px;
-
-    
+  
 }
 .sign_content .form-group span{
     font-size: 14px;
@@ -157,8 +160,7 @@ font-size: 10px;
     height: 50px;
     padding: 0;
     margin-left: 0;
-    background-color: #03519C;
-    
+    background-color: #03519C; 
     font-size: 14px;
     color: #fff ;
     line-height: 50px ;
@@ -166,9 +168,7 @@ font-size: 10px;
     outline: none !important;
     border: none;
     background-image: -webkit-linear-gradient( 150deg, rgb(3,81,156) 0%, rgb(49,117,182) 51%, rgb(94,152,207) 100%);
-   
-   
-            
+        
   
 }
 
@@ -209,7 +209,7 @@ font-size: 10px;
     border-color: #03519C;
     
 }
-.btn-group-toggle .btn.blueBtn:hover{
+.btn-group-toggle .btn.teacher-btn:hover{
     background-color: #fff;
     color: #03519C;
     border-color: #03519C;
@@ -246,7 +246,6 @@ input[type="radio"] {
 .sign_content .form-group .btn:hover{
 
     background: #fff;
-
     color: #03519C;
   
 }

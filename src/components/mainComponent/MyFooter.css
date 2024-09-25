@@ -1,7 +1,6 @@
+/* Footer Section */
 
- /* Footer Section */
-
- footer{
+footer{
     padding: 0 60px;
     background-image: -moz-linear-gradient( 150deg, rgb(48, 12, 131) 0%, rgb(26, 71, 113) 51%, rgb(24, 46, 137) 100%);
     background-image: -webkit-linear-gradient( 150deg, rgb(48, 12, 131) 0%, rgb(26, 71, 113) 51%, rgb(24, 46, 137) 100%);
@@ -204,6 +203,7 @@ footer .hidden-lg{display: none;}
     -o-transition: all 0.4s ease;
     transition: all 0.4s ease;
 }
+
 .accordion li:last-child .link {
     border-bottom: 0;
 }
@@ -240,6 +240,8 @@ footer .hidden-lg{display: none;}
 
 .accordion li.open .row {
     display: block;
+
+
 } 
 
  /* Footer Section End*/
@@ -381,7 +383,3 @@ footer .hidden-lg{display: none;}
 
 
    /* Align title and links in the same column */
-
-
-
-   
