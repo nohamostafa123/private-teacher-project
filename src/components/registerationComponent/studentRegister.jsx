@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './style.css';
+import axios from 'axios';
 
 export default function StudentRegister() {
   // State to store form input values
@@ -13,6 +14,7 @@ export default function StudentRegister() {
     country: '',
     password: '',
     confirmPassword: ''
+    
   });
 
   // Update state as user inputs data
@@ -37,7 +39,7 @@ export default function StudentRegister() {
   };
 
   // Form submission handler with validation
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const { firstName, lastName, email, country, password, confirmPassword } = formData;
@@ -72,14 +74,18 @@ export default function StudentRegister() {
       return;
     }
 
-    Swal.fire({
-      icon: 'success',
-      title: 'Success',
-      text: 'Registration successful!',
-    });
-
-    // Proceed with form submission (API call or other action)
-    console.log('Form data:', formData);
+    try {
+      const response = await axios.post('http://localhost:5000/api/students/register', formData);
+      if (response.data.success) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Registration successful!',
+        });
+      }
+    } catch (error) {
+      showAlert('Registration failed. Please try again.');
+    }
   };
 
   return (

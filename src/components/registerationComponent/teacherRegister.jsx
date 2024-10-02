@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Swal from 'sweetalert2';
 import './style.css';
+import axios from 'axios';
 
 export default function TeacherRegister() {
   const [formData, setFormData] = useState({
@@ -67,11 +68,18 @@ export default function TeacherRegister() {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Form is valid, submit the form (this would be a place to send data to a backend)
-      Swal.fire('Success', 'Registration successful!', 'success');
+      try {
+        // API call to register the teacher
+        const response = await axios.post('http://localhost:5000/api/teachers/register', formData);
+        if (response.data.success) {
+          Swal.fire('Success', 'Registration successful!', 'success');
+        }
+      } catch (error) {
+        Swal.fire('Error', 'Registration failed. Please try again.', 'error');
+      }
     }
   };
 
