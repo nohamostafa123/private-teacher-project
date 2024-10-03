@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from 'react-bootstrap';
 import Left from './Left';
-import PaginationContainer from './pagination-container';
+import PaginationContainer from './PaginationContainer';
 // import "./teachers.css";
 
 
@@ -12,6 +12,7 @@ function MainContainer() {
             <div className="row  d-flex justify-content-center">
                 <Left />
                 <PaginationContainer />
+
 
             </div>
         </Container >

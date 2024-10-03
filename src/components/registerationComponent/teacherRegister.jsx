@@ -101,7 +101,7 @@ export default function TeacherRegister() {
       <div className="container-fluid">
         <div className="sign_content">
           <div className="logo">
-            <a href="#">
+            <a href="/">
               <img src="./images/logo.png" alt="Logo" />
               <div className="logo_title">
                 <h1>Private Teacher</h1>
