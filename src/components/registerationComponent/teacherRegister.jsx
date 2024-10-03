@@ -249,8 +249,7 @@ export default function TeacherRegister() {
               />
               <span className="fa fa-lock"></span>
             </div>
-
-            <div className="form-group">
+{/*<div className="form-group">
               <label>
                 <input
                   type="checkbox"
@@ -261,7 +260,8 @@ export default function TeacherRegister() {
                 />
                 Remember me
               </label>
-            </div>
+            </div>*/}
+            
 
             <div className="form-group">
               <input type="submit" className="btn" value="Register" />

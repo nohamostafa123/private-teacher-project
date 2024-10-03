@@ -23,7 +23,7 @@ export default class MainHero extends Component {
                   <a href="/ContactApp">Contact +</a>
                 </li>
               </ul>
-              <Button href="/TeacherRegister" className="btn">Register As Teacher</Button>
+              <Button href="/TeacherRegister" className="register-btn">Register As Teacher</Button>
             </div>
 
 

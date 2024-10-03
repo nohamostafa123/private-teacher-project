@@ -175,3 +175,10 @@ label {
 input[type="radio"] {
   margin-right: 10px;
 }
+.radio-rating {
+  display: block !important;
+
+  z-index: 1 !important;
+  width: 20px !important;
+  border-radius: 50% !important;
+}

@@ -100,7 +100,23 @@
     }
 
 }
-
+.register-btn {
+    background-color: #0055af;
+    color: white !important;
+    padding: 10px 20px;
+    width: 200px;
+    border-radius: 5px;
+    font-size: 10px;
+    text-decoration: none;
+    text-align: center !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  .register-btn:hover {
+    background-color: #003f8a !important;
+    color: white !important;
+  }
 /* @media (max-width:990px) {
     .contact .info .row {
         /* padding: 80px 60px; 
@@ -118,6 +134,7 @@
     position: relative;
     text-align: right;
 }
+
 
 .contact .contact_form .title {
     /* margin-bottom: 20px; */

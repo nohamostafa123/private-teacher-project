@@ -70,10 +70,10 @@ export default function Login() {
               <div className="col-lg-12">
                 <div className="btn-group btn-group-toggle" data-toggle="buttons">
                   <label className="btn btn-secondary active student-btn">
-                    <input type="radio" name="type" id="option2" value="1" autoComplete="off" defaultChecked /> Student
+                    <input type="radio" name="type" id="option2" value="1" autoComplete="off" defaultChecked className='radio-btn' /> Student
                   </label>
                   <label className="btn btn-secondary teacher-btn">
-                    <input type="radio" name="type" id="option1" value="2" autoComplete="off" /> Teacher
+                    <input type="radio" name="type" id="option1" value="2" autoComplete="off" className='radio-btn' /> Teacher
                   </label>
                 </div>
               </div>
@@ -105,13 +105,13 @@ export default function Login() {
               />
               <span className="fa fa-lock"></span>
             </div>
-
-            <div className="form-group">
+{/**<div className="form-group">
               <label>
                 <input type="checkbox" name="remember" className="form-control" /> Remember me
               </label>
             </div>
-
+ */}
+            
             <div className="form-group">
               <input type="submit" className="btn" value="Login" />
             </div>

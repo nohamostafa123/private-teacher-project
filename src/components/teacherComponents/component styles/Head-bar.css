@@ -10,7 +10,7 @@
 .view-btns button:hover {
   background-color: #ddd;
 }
-.active {
+.activebar {
   background: linear-gradient(to bottom, #3a8edb, #0a60a9) !important;
 }
 .active i {

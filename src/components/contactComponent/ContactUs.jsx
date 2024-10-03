@@ -8,10 +8,15 @@ import "./contactUs.scss";
   rel="stylesheet"
   integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
   crossorigin="anonymous"
-></link>;
+/>;
 
 export default function ContactUs() {
   useEffect(() => {
+    // Check if the map is already initialized
+    if (L.DomUtil.get("map") !== null) {
+      L.DomUtil.get("map")._leaflet_id = null;
+    }
+
     // Initialize the map and set view to Cairo
     var map = L.map("map").setView([30.0444, 31.2357], 13);
 
@@ -36,50 +41,46 @@ export default function ContactUs() {
 
   return (
     <section className="contact">
-      
-        <div className="info container-fluid  ">
-          <div className="row gx-6  mx-5">
-
-            <div className="info_block col-lg-4 col-md-6 col-xs-12">
-              <span className="fa fa-envelope"></span>
-              <div className="text">
-                <h2> E-mail</h2>
-                <h3>info@tqniait.com</h3>
-                <h3>info@tqniait.com</h3>
-              </div>
+      <div className="info container-fluid">
+        <div className="row gx-6 mx-5">
+          <div className="info_block col-lg-4 col-md-6 col-xs-12">
+            <span className="fa fa-envelope"></span>
+            <div className="text">
+              <h2>E-mail</h2>
+              <h3>info@tqniait.com</h3>
+              <h3>info@tqniait.com</h3>
             </div>
+          </div>
 
-            <div className="info_block col-lg-4 col-md-6  col-xs-12">
-              <span className="fa fa-phone"></span>
-              <div className="text">
-                <h2> Phone</h2>
-                <h3>موقع مدرس خصوصي</h3>
-                <h3>Private Teacher Site</h3>
-              </div>
+          <div className="info_block col-lg-4 col-md-6 col-xs-12">
+            <span className="fa fa-phone"></span>
+            <div className="text">
+              <h2>Phone</h2>
+              <h3>موقع مدرس خصوصي</h3>
+              <h3>Private Teacher Site</h3>
             </div>
+          </div>
 
-            <div className="info_block col-lg-4 col-md-6  col-xs-12">
-              <span className="fa fa-map-marker-alt"></span>
-              <div className="text">
-                <h2>Our Location</h2>
-                <h3>Your best choice for your Private Teacher</h3>
-              </div>
+          <div className="info_block col-lg-4 col-md-6 col-xs-12">
+            <span className="fa fa-map-marker-alt"></span>
+            <div className="text">
+              <h2>Our Location</h2>
+              <h3>Your best choice for your Private Teacher</h3>
             </div>
-            
           </div>
         </div>
-      
+      </div>
 
-      <div className="container-fluid contact_form mt-5 ">
-        <div className="container-fluid ">
-          <div className="title m-">
+      <div className="container-fluid contact_form mt-5">
+        <div className="container-fluid">
+          <div className="title">
             <h1>Stay in touch with us</h1>
-            <h3> write a message :</h3>
+            <h3>Write a message:</h3>
             <hr />
           </div>
 
-          <div className="container-fluid  row mt-5 justify-content-between ">
-            <div className="col-md-6 col-xs-12 col-sm-12 ">
+          <div className="container-fluid row mt-5 justify-content-between">
+            <div className="col-md-6 col-xs-12 col-sm-12">
               <form className="row gy-2 mb-5">
                 <div className="col-md-6">
                   <input
@@ -94,7 +95,7 @@ export default function ContactUs() {
                     type="text"
                     className="form-control"
                     id="email"
-                    placeholder="Mail or Phone "
+                    placeholder="Mail or Phone"
                   />
                 </div>
                 <div className="col-12">
@@ -113,11 +114,10 @@ export default function ContactUs() {
               </form>
             </div>
 
-              <div className="col-md-12 col-xs-12 col-sm-12">
-                {/* Map container */}
-                <div id="map" style={{ height: "400px" }}></div>
-              </div>
-            
+            <div className="col-md-12 col-xs-12 col-sm-12">
+              {/* Map container */}
+              <div id="map" style={{ height: "400px" }}></div>
+            </div>
           </div>
         </div>
       </div>

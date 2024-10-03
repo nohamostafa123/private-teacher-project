@@ -47,21 +47,17 @@
   align-items: center !important;
   border: none !important;
   cursor: pointer !important;
-
-
 }
 .grid-layout .favorite-button:hover {
   background: #ccc;
 }
-
-.grid-layout .heart-icon {
-  font-size: 1.5rem;
+.grid-layout .favorite-button .heart-icon {
+  font-size: 1.1rem;
   color: #0055af;
-  transition: color 0.3s ease;
 }
 
-.grid-layout .heart-icon.filled {
-  color: #5ba9fd;
+.grid-layout .favorite-button .filled-heart-icon {
+  color: #0055af;
 }
 
 .grid-layout .teacher-title {
@@ -168,4 +164,57 @@
 
 .grid-layout .contact-button:hover {
   color: #fff; /* Optional: Change text color on hover */
+}
+@media (max-width: 1200px) {
+  .grid-layout .teacher-card {
+    margin-bottom: 20px;
+  }
+  .grid-layout .teacher-image {
+    height: 250px;
+  }
+  .grid-layout .teacher-title {
+    font-size: 1rem;
+  }
+  .grid-layout .teacher-name {
+    font-size: 0.9rem;
+  }
+  .grid-layout .teacher-rating {
+    margin: 5px 0;
+  }
+  .grid-layout .star-icon {
+    font-size: 0.9rem;
+  }
+  .grid-layout .rating-number {
+    font-size: 0.8rem;
+  }
+  .grid-layout .teacher-meta {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .grid-layout .teacher-card {
+    margin-bottom: 20px;
+  }
+  .grid-layout .teacher-image {
+    height: 200px;
+  }
+  .grid-layout .teacher-title {
+    font-size: 1rem;
+  }
+  .grid-layout .teacher-name {
+    font-size: 0.9rem;
+  }
+  .grid-layout .teacher-rating {
+    margin: 5px 0;
+  }
+  .grid-layout .star-icon {
+    font-size: 0.9rem;
+  }
+  .grid-layout .rating-number {
+    font-size: 0.8rem;
+  }
+  .grid-layout .teacher-meta {
+    font-size: 0.8rem;
+  }
 }

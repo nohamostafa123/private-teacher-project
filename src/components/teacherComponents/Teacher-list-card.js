@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './component styles/card-list.css'
 import {
     FaMapMarkerAlt,
@@ -15,10 +15,27 @@ import './component styles/TeacherCard.css';
 
 const TeacherListCard = ({ teacher }) => {
     const [isFavorited, setIsFavorited] = useState(false);
+    useEffect(() => {
+        const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        setIsFavorited(savedFavorites.includes(teacher.id));
+    }, [teacher.id]);
 
     const handleFavoriteClick = () => {
+        const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (isFavorited) {
+
+            const updatedFavorites = savedFavorites.filter(id => id !== teacher.id);
+            localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+        } else {
+
+            savedFavorites.push(teacher.id);
+            localStorage.setItem('favorites', JSON.stringify(savedFavorites));
+        }
+
         setIsFavorited(!isFavorited);
     };
+
 
     const renderStars = (rating) => {
         const fullStars = Math.floor(rating);

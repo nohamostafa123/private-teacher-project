@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './component styles/PaginationComponent.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightLong } from '@fortawesome/free-solid-svg-icons';
-
 
 const PaginationComponent = ({ totalPages, currentPage, setCurrentPage }) => {
     const pageNumbers = [];
@@ -11,6 +10,11 @@ const PaginationComponent = ({ totalPages, currentPage, setCurrentPage }) => {
     for (let i = 1; i <= totalPages; i++) {
         pageNumbers.push(i);
     }
+
+    // Update localStorage when currentPage changes
+    useEffect(() => {
+        localStorage.setItem('currentPage', currentPage);  // Save the current page in localStorage
+    }, [currentPage]);
 
     // Function to handle page changes
     const handleNext = () => {
@@ -27,7 +31,7 @@ const PaginationComponent = ({ totalPages, currentPage, setCurrentPage }) => {
 
     return (
         <div className="pagination-container col-md-12 d-flex justify-content-center align-items-center">
-            <button className="prev btn btn-light" onClick={handlePrev} disabled={currentPage === 1}>
+            <button className="prev btn-light" onClick={handlePrev} disabled={currentPage === 1}>
                 <FontAwesomeIcon icon={faRightLong} flip="horizontal" />
             </button>
 
@@ -44,7 +48,7 @@ const PaginationComponent = ({ totalPages, currentPage, setCurrentPage }) => {
                 ))}
             </ul>
 
-            <button className="next btn btn-light" onClick={handleNext} disabled={currentPage === totalPages}>
+            <button className="next btn-light" onClick={handleNext} disabled={currentPage === totalPages}>
                 <FontAwesomeIcon icon={faRightLong} />
             </button>
         </div>
