@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Swal from 'sweetalert2';
+import axios from 'axios'; // Ensure axios is imported
 import './style.css';
-import axios from 'axios';
 
 export default function TeacherRegister() {
   const [formData, setFormData] = useState({
@@ -73,14 +73,31 @@ export default function TeacherRegister() {
     if (validateForm()) {
       console.log(formData); // تحقق من البيانات المرسلة
       try {
-        // API call to register the teacher
-        const response = await axios.post('http://localhost:5000/api/teachers/register', formData);
+        const response = await axios.post('http://localhost:5000/api/teachers/register', formData); // Ensure your endpoint is correct
         if (response.data.success) {
           Swal.fire('Success', 'Registration successful!', 'success');
+          setFormData({
+            first_name: '',
+            last_name: '',
+            email: '',
+            phone: '',
+            teacher_desc: '',
+            password: '',
+            repassword: '',
+            subject_id: '',
+            remember: false
+          });
+        } else {
+          Swal.fire('Error', response.data.message, 'error');
         }
       } catch (error) {
+<<<<<<< HEAD
         console.log(error.response?.data); // تحقق من رسالة الخطأ القادمة من السيرفر
         Swal.fire('Error', 'Registration failed. Please try again.', 'error');
+=======
+        console.error('Registration error:', error); // Log the error
+        Swal.fire('Error', error.response?.data?.message || 'Registration failed. Please try again.', 'error');
+>>>>>>> f4b622beb54ca446c80dcf75292773a9fcceb8ba
       }
     }
   };
@@ -90,7 +107,7 @@ export default function TeacherRegister() {
       <div className="container-fluid">
         <div className="sign_content">
           <div className="logo">
-            <a href="#">
+            <a href="/">
               <img src="./images/logo.png" alt="Logo" />
               <div className="logo_title">
                 <h1>Private Teacher</h1>
@@ -132,44 +149,44 @@ export default function TeacherRegister() {
                 value={formData.subject_id}
                 onChange={handleInputChange}
               >
-                <option disabled value="" >
+                <option disabled value="">
                   اختار اسم المادة
                 </option>
                 <option value="2" style={{ backgroundColor: '#1B62A4' }}>
                   Arabic
                 </option>
                 <option value="26" style={{ backgroundColor: '#1B62A4' }}>
-                Biology
+                  Biology
                 </option>
                 <option value="25" style={{ backgroundColor: '#1B62A4' }}>
-                Chemistry
+                  Chemistry
                 </option>
                 <option value="3" style={{ backgroundColor: '#1B62A4' }}>
-                English
+                  English
                 </option>
                 <option value="23" style={{ backgroundColor: '#1B62A4' }}>
-                French
+                  French
                 </option>
                 <option value="7" style={{ backgroundColor: '#1B62A4' }}>
-                geography
+                  Geography
                 </option>
                 <option value="8" style={{ backgroundColor: '#1B62A4' }}>
-                History
+                  History
                 </option>
                 <option value="6" style={{ backgroundColor: '#1B62A4' }}>
-                Math
+                  Math
                 </option>
                 <option value="28" style={{ backgroundColor: '#1B62A4' }}>
-                Philosophy
+                  Philosophy
                 </option>
                 <option value="24" style={{ backgroundColor: '#1B62A4' }}>
-                Physics
+                  Physics
                 </option>
                 <option value="27" style={{ backgroundColor: '#1B62A4' }}>
-                Psychology
+                  Psychology
                 </option>
                 <option value="5" style={{ backgroundColor: '#1B62A4' }}>
-                Science
+                  Science
                 </option>
                 {/* Add other subjects here */}
               </select>
@@ -238,8 +255,7 @@ export default function TeacherRegister() {
               />
               <span className="fa fa-lock"></span>
             </div>
-
-            <div className="form-group">
+{/*<div className="form-group">
               <label>
                 <input
                   type="checkbox"
@@ -250,7 +266,8 @@ export default function TeacherRegister() {
                 />
                 Remember me
               </label>
-            </div>
+            </div>*/}
+            
 
             <div className="form-group">
               <input type="submit" className="btn" value="Register" />

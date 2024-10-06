@@ -93,7 +93,7 @@ export default function StudentRegister() {
       <div className="container-fluid">
         <div className="sign_content">
           <div className="logo">
-            <a href="#">
+            <a href="/">
               <img src="./images/logo.png" alt="Logo" />
               <div className="logo_title">
                 <h1>Private Teacher</h1>
@@ -180,13 +180,13 @@ export default function StudentRegister() {
               />
               <span className="fa fa-lock"></span>
             </div>
-
-            <div className="form-group">
+{/* <div className="form-group">
               <label>
                 <input type="checkbox" name="remember" className="form-control" />
                 Remember me
               </label>
-            </div>
+            </div>*/}
+            
 
             <div className="form-group">
               <div className="g-recaptcha" data-sitekey="your-site-key"></div>

@@ -8,23 +8,23 @@ class TeacherHero extends React.Component {
 
       <section className="hero hh">
         <div className="bg_container">
-        <div className="subnav">
-        <ul className="subnav-list">
-          <li className="subnav-item">
-            <a href="/">Home +</a>
-          </li>
-          <li className="subnav-item">
-            <a href="/AboutApp">About +</a>
-          </li>
-          <li className="subnav-item">
-            <a href="/TeacherApp">Teacher +</a>
-          </li>
-          <li className="subnav-item">
-            <a href="/ContactApp">Contact +</a>
-          </li>
-        </ul>
-        <Button href="/TeacherRegister" className="btn">Register As Teacher</Button>
-      </div>
+          <div className="subnav">
+            <ul className="subnav-list">
+              <li className="subnav-item">
+                <a href="/">Home +</a>
+              </li>
+              <li className="subnav-item">
+                <a href="/AboutApp">About +</a>
+              </li>
+              <li className="subnav-item">
+                <a href="/TeacherApp">Teacher +</a>
+              </li>
+              <li className="subnav-item">
+                <a href="/ContactApp">Contact +</a>
+              </li>
+            </ul>
+            <Button href="/TeacherRegister" className="register-btn">Register As Teacher</Button>
+          </div>
           <img src="./images/heros.png" className="bg" alt="Hero Background" />
         </div>
 
