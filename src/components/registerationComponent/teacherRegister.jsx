@@ -71,6 +71,7 @@ export default function TeacherRegister() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
+      console.log(formData); // تحقق من البيانات المرسلة
       try {
         // API call to register the teacher
         const response = await axios.post('http://localhost:5000/api/teachers/register', formData);
@@ -78,6 +79,7 @@ export default function TeacherRegister() {
           Swal.fire('Success', 'Registration successful!', 'success');
         }
       } catch (error) {
+        console.log(error.response?.data); // تحقق من رسالة الخطأ القادمة من السيرفر
         Swal.fire('Error', 'Registration failed. Please try again.', 'error');
       }
     }
