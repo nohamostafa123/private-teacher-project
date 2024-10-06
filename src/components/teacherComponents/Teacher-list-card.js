@@ -1,41 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import './component styles/card-list.css'
+import './component styles/card-list.css';
 import {
-    FaMapMarkerAlt,
-    FaTransgenderAlt,
     FaStar,
     FaRegStar,
     FaGraduationCap,
     FaUserAlt,
     FaHome,
     FaHeart,
-    FaRegHeart
+    FaRegHeart,
+    FaFlag,
+    FaBriefcase,
+    FaPhoneAlt
 } from 'react-icons/fa';
 import './component styles/TeacherCard.css';
 
 const TeacherListCard = ({ teacher }) => {
     const [isFavorited, setIsFavorited] = useState(false);
+
     useEffect(() => {
         const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-        setIsFavorited(savedFavorites.includes(teacher.id));
-    }, [teacher.id]);
+        setIsFavorited(savedFavorites.includes(teacher._id));
+    }, [teacher._id]);
 
     const handleFavoriteClick = () => {
         const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
         if (isFavorited) {
-
-            const updatedFavorites = savedFavorites.filter(id => id !== teacher.id);
+            const updatedFavorites = savedFavorites.filter(id => id !== teacher._id);
             localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
         } else {
-
-            savedFavorites.push(teacher.id);
+            savedFavorites.push(teacher._id);
             localStorage.setItem('favorites', JSON.stringify(savedFavorites));
         }
 
         setIsFavorited(!isFavorited);
     };
-
 
     const renderStars = (rating) => {
         const fullStars = Math.floor(rating);
@@ -57,29 +56,41 @@ const TeacherListCard = ({ teacher }) => {
 
             <div className="teacher-image-container">
                 <img
-                    src={teacher.profilePicture || '/default-avatar.png'}
-                    alt={teacher.name}
+                    src={teacher.image || 'https://via.placeholder.com/150?text=No+Image'}
+                    alt={`${teacher.first_name} ${teacher.last_name}`}
                     className="teacher-image"
                 />
             </div>
 
             <div className="card-body">
-                <h5 className="teacher-title">{teacher.jobTitle}</h5>
-                <h6 className=" text-muted teacher-account"><FaUserAlt className="me-2 teacher-account" /> {teacher.name}</h6>
+                <h5 className="teacher-title">{teacher.teacher_desc}</h5>
+                <h6 className="text-muted teacher-account">
+                    <FaUserAlt className="me-2 teacher-account" /> {`${teacher.first_name} ${teacher.last_name}`}
+                </h6>
+
                 <div className="teacher-rating">
-                    {renderStars(teacher.rating)}
-                    <span className="rating-number">({teacher.rating})</span>
+                    {renderStars(teacher.rating || 0)}
+                    <span className="rating-number">({teacher.rating || 0})</span>
                 </div>
 
                 <div className="teacher-meta">
-                    <p><FaGraduationCap /> {teacher.subject}</p>
-                    <p><FaUserAlt /> {teacher.gender}</p>
-                    <p><FaMapMarkerAlt /> {teacher.location}</p>
-                    <p><FaHome /> {teacher.teachingMethod}</p>
-                    <p><FaTransgenderAlt /> {teacher.experience} exp</p>
-                </div>
+                    <p className="mb-1"><FaGraduationCap className="me-2" /> Subject: {teacher.subject_id}</p>
+                    <p className='pipe' >|</p>
+                    <p className="mb-1"><FaUserAlt className="me-2" /> Gender: {teacher.gender}</p>
+                    <p className='pipe' >|</p>
+                    <p className="mb-1"><FaPhoneAlt className="me-2" /> Phone: {teacher.phone}</p>
+                    <p className='pipe' >|</p>
+                    <p className="mb-1"><FaFlag className="me-2" /> Country: {teacher.country || 'Egypt'}</p>
+                    <p className='pipe' >|</p>
+                    <p className="mb-1"><FaBriefcase className="me-2" /> Experience: {teacher.years_of_experience} years</p>
+                    <p className='pipe' >|</p>
+                    <p className="mb-1"><FaHome className="me-2" />Status: {teacher.onlineStatus} </p>
 
-                <button className="contact-button">Contact</button>
+                </div>
+                <div className='contact-button-container'>
+
+                    <button className="contact-button ">Contact</button>
+                </div>
             </div>
         </div>
     );

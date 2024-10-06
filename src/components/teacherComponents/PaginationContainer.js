@@ -5,18 +5,38 @@ import TeachersSection from './TeachersSection';
 
 function PaginationContainer() {
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 3;
+    const [totalTeachers, setTotalTeachers] = useState(0);
+    const itemsPerPage = 6;
 
-    const totalTeachers = 10;
-    const totalPages = Math.ceil(totalTeachers / itemsPerPage);
 
-    // Retrieve the saved current page from localStorage
     useEffect(() => {
         const savedPage = localStorage.getItem('currentPage');
         if (savedPage) {
-            setCurrentPage(Number(savedPage));  // Convert string to number
+            setCurrentPage(Number(savedPage));
         }
     }, []);
+
+
+    useEffect(() => {
+        const fetchTotalTeachers = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/teachers/list');
+                const data = await response.json();
+
+                if (Array.isArray(data)) {
+                    setTotalTeachers(data.length);
+                } else {
+                    console.error("Unexpected response format:", data);
+                }
+            } catch (err) {
+                console.error('Error fetching teachers:', err);
+            }
+        };
+
+        fetchTotalTeachers();
+    }, []);
+
+    const totalPages = Math.ceil(totalTeachers / itemsPerPage);
 
     return (
         <div className="container col-md-8 d-flex justify-content-center">

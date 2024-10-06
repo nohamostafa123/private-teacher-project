@@ -6,17 +6,17 @@ import { faRightLong } from '@fortawesome/free-solid-svg-icons';
 const PaginationComponent = ({ totalPages, currentPage, setCurrentPage }) => {
     const pageNumbers = [];
 
-    // Generate the array of page numbers
+
     for (let i = 1; i <= totalPages; i++) {
         pageNumbers.push(i);
     }
 
-    // Update localStorage when currentPage changes
+
     useEffect(() => {
-        localStorage.setItem('currentPage', currentPage);  // Save the current page in localStorage
+        localStorage.setItem('currentPage', currentPage);
     }, [currentPage]);
 
-    // Function to handle page changes
+
     const handleNext = () => {
         if (currentPage < totalPages) {
             setCurrentPage(currentPage + 1);

@@ -11,11 +11,11 @@
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: left;
-
+  margin: 0 !important;
+  margin-bottom: 20px !important;
   transition: transform 0.3s ease;
   position: relative;
 
-  margin: 20px;
   overflow: hidden;
 }
 
@@ -169,8 +169,8 @@
 }
 
 .list-layout .teacher-image {
-  height: 100%;
-  width: 250px;
+  height: 250px;
+  min-width: 250px;
   max-width: 100%;
   margin-right: 35px;
 }
@@ -253,10 +253,8 @@
 }
 
 .list-layout .contact-button {
-  display: block;
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
+  position: relative;
+  display: inline-block;
   width: 200px;
   padding: 10px 0;
   color: #007bff;
@@ -264,7 +262,7 @@
   border: 1px solid #007bff;
   border-radius: 100px;
   font-size: 1.1rem;
-  margin-top: 20px 0;
+  margin: 0 !important;
   text-align: center;
   overflow: hidden;
   z-index: 1;
@@ -291,6 +289,12 @@
 
 .list-layout .contact-button:hover {
   color: #fff;
+}
+
+.contact-button-container {
+  margin-top: 50px;
+  display: flex;
+  justify-content: end;
 }
 
 @media (max-width: 992px) {
