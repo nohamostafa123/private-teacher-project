@@ -176,17 +176,19 @@
 }
 
 .list-layout .favorite-button {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: color 0.3s ease;
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  background: #f6f6f6 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  border: none !important;
+  cursor: pointer !important;
 }
 
 .list-layout .favorite-button .heart-icon {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   color: #0055af;
 }
 

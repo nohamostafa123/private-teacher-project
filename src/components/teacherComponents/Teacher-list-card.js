@@ -50,7 +50,7 @@ const TeacherListCard = ({ teacher }) => {
 
     return (
         <div className="teacher-card">
-            <button className="favorite-button" onClick={handleFavoriteClick}>
+            <button className="position-absolute top-0 end-0 m-2 favorite-button p-2 rounded-circle" onClick={handleFavoriteClick}>
                 {isFavorited ? <FaHeart className="heart-icon filled-heart-icon" /> : <FaRegHeart className="heart-icon" />}
             </button>
 
