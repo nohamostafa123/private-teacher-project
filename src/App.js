@@ -4,6 +4,7 @@ import Home from './Home.js';
 import TeacherApp from './TeacherApp.js';
 import AboutApp from './AboutApp.js';
 import Login from './components/registerationComponent/Login';
+import Profile from './Profile.js';
 import StudentRegister from './components/registerationComponent/studentRegister'
 import TeacherRegister from './components/registerationComponent/teacherRegister';
 import ContactApp from './ContactApp.js';
@@ -14,22 +15,24 @@ window.jQuery = $;
 function App() {
   return (
     <>
-    <Router>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/TeacherApp" element={<TeacherApp />} />
-      <Route path="/AboutApp" element={<AboutApp />} />
-      <Route path="/Login" element={<Login />} />
-      <Route path="/StudentRegister" element={<StudentRegister />} />
-      <Route path="/TeacherRegister" element={<TeacherRegister />} />
-      <Route path="/ContactApp" element={<ContactApp />} />
-      
-    </Routes>
-  </Router>
-   
-   
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/TeacherApp" element={<TeacherApp />} />
+          <Route path="/AboutApp" element={<AboutApp />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/StudentRegister" element={<StudentRegister />} />
+          <Route path="/TeacherRegister" element={<TeacherRegister />} />
+          <Route path="/ContactApp" element={<ContactApp />} />
 
-    
+          <Route path="/profile" element={<Profile />} />
+
+        </Routes>
+      </Router>
+
+
+
+
     </>
   );
 }
