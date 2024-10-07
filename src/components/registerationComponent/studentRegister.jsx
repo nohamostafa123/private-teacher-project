@@ -199,7 +199,7 @@ export default function StudentRegister() {
           </form>
 
           <h6>
-            I already have an account <a href="/">Login</a>
+            I already have an account <a href="/Login">Login</a>
           </h6>
         </div>
       </div>

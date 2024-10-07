@@ -91,13 +91,12 @@ export default function TeacherRegister() {
           Swal.fire('Error', response.data.message, 'error');
         }
       } catch (error) {
-<<<<<<< HEAD
-        console.log(error.response?.data); // تحقق من رسالة الخطأ القادمة من السيرفر
-        Swal.fire('Error', 'Registration failed. Please try again.', 'error');
-=======
+// <<<<<<< HEAD
+//         console.log(error.response?.data); // تحقق من رسالة الخطأ القادمة من السيرفر
+//         Swal.fire('Error', 'Registration failed. Please try again.', 'error');
+
         console.error('Registration error:', error); // Log the error
         Swal.fire('Error', error.response?.data?.message || 'Registration failed. Please try again.', 'error');
->>>>>>> f4b622beb54ca446c80dcf75292773a9fcceb8ba
       }
     }
   };
@@ -275,7 +274,7 @@ export default function TeacherRegister() {
           </form>
 
           <h6>
-            I already have an account <a href="/">Login</a>
+            I already have an account <a href="/Login">Login</a>
           </h6>
         </div>
       </div>
