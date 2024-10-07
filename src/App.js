@@ -8,6 +8,7 @@ import Profile from './Profile.js';
 import StudentRegister from './components/registerationComponent/studentRegister'
 import TeacherRegister from './components/registerationComponent/teacherRegister';
 import ContactApp from './ContactApp.js';
+import AdminDashboard from './AdminDashBoard.js';
 import 'leaflet/dist/leaflet.css';
 import $ from 'jquery';
 window.$ = $;
@@ -24,8 +25,9 @@ function App() {
           <Route path="/StudentRegister" element={<StudentRegister />} />
           <Route path="/TeacherRegister" element={<TeacherRegister />} />
           <Route path="/ContactApp" element={<ContactApp />} />
-
           <Route path="/profile" element={<Profile />} />
+          <Route path="/AdminDashboard" element={<AdminDashboard />} />
+      
 
         </Routes>
       </Router>
