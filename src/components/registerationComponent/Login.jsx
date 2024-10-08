@@ -24,7 +24,7 @@ export default function Login() {
   };
 
   // Form submission handler
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     let valid = true;
@@ -40,19 +40,39 @@ export default function Login() {
     }
 
     if (valid) {
-      localStorage.setItem('loggedIn', 'true');
-      Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: 'Form submitted successfully!',
-        customClass: {
-      confirmButton: 'custom-confirm',    
-    },
-      }).then(() => {
-        navigate('/');
-      });
+      try {
+        // Call the backend API to check credentials
+        const response = await fetch('http://localhost:5000/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Login successful!',
+            text: 'Redirecting...',
+            customClass: {
+              confirmButton: 'custom-confirm',
+            },
+          }).then(() => {
+            localStorage.setItem('loggedIn', 'true');
+            navigate('/');
+          });
+        } else {
+          showAlert(data.message); // Show error message from backend
+        }
+      } catch (err) {
+        showAlert('An error occurred. Please try again.');
+      }
     }
   };
+
 
   return (
     <section className="register">
