@@ -75,7 +75,14 @@ export default function TeacherRegister() {
       try {
         const response = await axios.post('http://localhost:5000/api/teachers/register', formData); // Ensure your endpoint is correct
         if (response.data.success) {
-          Swal.fire('Success', 'Registration successful!', 'success');
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Registration successful!',
+            customClass: {
+              confirmButton: 'custom-confirm', // Apply custom class to confirm button
+            },
+          });
           setFormData({
             first_name: '',
             last_name: '',
@@ -85,10 +92,18 @@ export default function TeacherRegister() {
             password: '',
             repassword: '',
             subject_id: '',
-            remember: false
+            remember: false,
+         
           });
         } else {
-          Swal.fire('Error', response.data.message, 'error');
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: response.data.message,
+            customClass: {
+              confirmButton: 'custom-confirm', // Apply custom class to confirm button
+            },
+          });
         }
       } catch (error) {
 // <<<<<<< HEAD

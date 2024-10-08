@@ -45,6 +45,9 @@ export default function Login() {
         icon: 'success',
         title: 'Success',
         text: 'Form submitted successfully!',
+        customClass: {
+      confirmButton: 'custom-confirm',    
+    },
       }).then(() => {
         navigate('/');
       });

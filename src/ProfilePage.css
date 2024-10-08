@@ -1,0 +1,94 @@
+/* src/ProfilePage.css */
+.bg-profile{
+     background-image: url(..//public/images/sign_bg.png);
+    background-size: cover;
+    background-position: top left;
+    background-repeat: no-repeat;
+    height: 160vh;
+    padding: 10px 0; 
+    
+  background-color: #f5f5f5;
+  
+}
+.profile-page {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  border: 4px solid rgba(3, 104, 199, 0.333) ;
+  /* background:linear-gradient(150deg, rgb(3,81,156) 0%, rgb(49,117,182) 51%, rgb(94,152,207) 100%);*/
+  border-radius: 10px; 
+  background-color: #f5f5f5;
+  box-shadow: 0px 4px 10px rgba(184, 125, 125, 0.1);
+}
+
+
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.profile-details {
+  display: flex;
+  left:0;
+  flex-direction: column;
+  align-items: center;
+}
+.avatar-container {
+  position: relative;
+  display: inline-block;
+}
+.profile-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid transparent ;
+  background:linear-gradient(150deg, rgb(3,81,156) 0%, rgb(49,117,182) 51%, rgb(94,152,207) 100%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+.camera-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.camera-icon svg {
+  color: #cecccc;
+}
+.profile-header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #0480c9;
+}
+
+.profile-header p {
+  font-size: 1rem;
+  color: #363636;
+  margin-left:  10px;
+}
+
+.inline-info {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #272727;
+}
+
+.inline-info strong {
+  color: #000000;
+}
+
+.online-status {
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.online-status.online {
+  color: green;
+}
+
+.online-status.offline {
+  color: red;
+}

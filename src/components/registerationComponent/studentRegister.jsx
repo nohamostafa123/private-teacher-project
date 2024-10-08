@@ -35,6 +35,9 @@ export default function StudentRegister() {
       icon: 'error',
       title: 'Invalid Input',
       text: message,
+      customClass: {
+        confirmButton: 'custom-confirm', // Apply custom class to confirm button
+      },
     });
   };
 
@@ -81,6 +84,10 @@ export default function StudentRegister() {
           icon: 'success',
           title: 'Success',
           text: 'Registration successful!',
+          customClass: {
+            confirmButton: 'custom-confirm', // Apply custom class to confirm button
+          },
+     
         });
       }
     } catch (error) {
@@ -199,7 +206,7 @@ export default function StudentRegister() {
           </form>
 
           <h6>
-            I already have an account <a href="/Login">Login</a>
+            I already have an account <a href="/">Login</a>
           </h6>
         </div>
       </div>
