@@ -293,15 +293,20 @@ select.form-control option {
 select.form-control option:hover {
   background-color: #f1f1f1; /* Light background on hover */
 }
-.radio-btn{
+.radio-btn {
   display: none;
 }
 .custom-confirm {
-background-image:linear-gradient(150deg, rgb(3,81,156) 0%, rgb(49,117,182) 51%, rgb(94,152,207) 100%);
-color: white;
-border: none;
+  background-image: linear-gradient(
+    150deg,
+    rgb(3, 81, 156) 0%,
+    rgb(49, 117, 182) 51%,
+    rgb(94, 152, 207) 100%
+  );
+  color: white;
+  border: none;
 }
-.custom-confirm:hover{
-background-color: #e9e9e9;
-color: #03519c;
+.custom-confirm:hover {
+  background-color: #e9e9e9;
+  color: #03519c;
 }

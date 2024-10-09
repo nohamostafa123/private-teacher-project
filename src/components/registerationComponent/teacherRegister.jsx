@@ -4,6 +4,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import Swal from 'sweetalert2';
 import axios from 'axios'; // Ensure axios is imported
 import './style.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function TeacherRegister() {
   const [formData, setFormData] = useState({
@@ -17,6 +18,7 @@ export default function TeacherRegister() {
     subject_id: '',
     remember: false
   });
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -34,7 +36,7 @@ export default function TeacherRegister() {
       return false;
     }
 
-    const emailPattern =/^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
+    const emailPattern = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
     if (!email || !emailPattern.test(email)) {
       Swal.fire('Error', 'Please enter a valid email address', 'error');
       return false;
@@ -77,12 +79,15 @@ export default function TeacherRegister() {
         if (response.data.success) {
           Swal.fire({
             icon: 'success',
-            title: 'Success',
-            text: 'Registration successful!',
+            title: 'Registration successful!',
+            text: 'Redirecting...',
             customClass: {
-              confirmButton: 'custom-confirm', // Apply custom class to confirm button
+              confirmButton: 'custom-confirm',
             },
+
+
           });
+          navigate('/Login');
           setFormData({
             first_name: '',
             last_name: '',
@@ -93,7 +98,7 @@ export default function TeacherRegister() {
             repassword: '',
             subject_id: '',
             remember: false,
-         
+
           });
         } else {
           Swal.fire({
@@ -106,9 +111,9 @@ export default function TeacherRegister() {
           });
         }
       } catch (error) {
-// <<<<<<< HEAD
-//         console.log(error.response?.data); // تحقق من رسالة الخطأ القادمة من السيرفر
-//         Swal.fire('Error', 'Registration failed. Please try again.', 'error');
+        // <<<<<<< HEAD
+        //         console.log(error.response?.data); // تحقق من رسالة الخطأ القادمة من السيرفر
+        //         Swal.fire('Error', 'Registration failed. Please try again.', 'error');
 
         console.error('Registration error:', error); // Log the error
         Swal.fire('Error', error.response?.data?.message || 'Registration failed. Please try again.', 'error');
@@ -269,7 +274,7 @@ export default function TeacherRegister() {
               />
               <span className="fa fa-lock"></span>
             </div>
-{/*<div className="form-group">
+            {/*<div className="form-group">
               <label>
                 <input
                   type="checkbox"
@@ -281,7 +286,7 @@ export default function TeacherRegister() {
                 Remember me
               </label>
             </div>*/}
-            
+
 
             <div className="form-group">
               <input type="submit" className="btn" value="Register" />

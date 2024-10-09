@@ -1,78 +1,227 @@
-// src/ProfilePage.js
 import React, { useEffect, useState } from 'react';
-import { Camera } from 'lucide-react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './ProfilePage.css';
 
+
 const Profile = () => {
-  const [teacher, setTeacher] = useState(null);
+  const { id } = useParams();
+  const [user, setUser] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
+  const [userType, setUserType] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null); // To store the uploaded image preview
+  const [isEditing, setIsEditing] = useState(false);
+  const [formData, setFormData] = useState({});
+  const iid = localStorage.getItem('userId');
 
-  useEffect(() => {
-    axios.get('http://localhost:5000/api/teachers/list')
-      .then(response => {
-        const teacherData = response.data[0]; // Assuming the first teacher
-        setTeacher(teacherData);
-        setLoading(false);
-      })
-      .catch(error => {
-        setError(error);
-        setLoading(false);
-      });
-  }, []);
-
-  // Handle file input change
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const imageURL = URL.createObjectURL(file);
-      setSelectedImage(imageURL); // Update the preview image
+  const fetchUserData = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/users/profile/${iid}`);
+      console.log(response.data);
+      setUser(response.data.additionalData);
+      setUserType(response.data.additionalData.userType);
+      setUserEmail(response.data.user.email);
+      setFormData(response.data.additionalData);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      setError("Failed to fetch user data");
+    } finally {
+      setLoading(false);
     }
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error loading profile: {error.message}</p>;
+  useEffect(() => {
+
+    fetchUserData();
+  }, [iid]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const endpoint = userType === 'teacher'
+      ? `http://localhost:5000/api/teachers/update/${id}`
+      : `http://localhost:5000/api/students/update/${id}`;
+
+    try {
+      const response = await axios.put(endpoint, formData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.log("Update response:", response.data);
+
+      if (response.data.success) {
+
+        setUser({ ...formData, onlineStatus: user.onlineStatus });
+        setIsEditing(false);
+        fetchUserData();
+      }
+    } catch (error) {
+      console.error("Error updating user data:", error);
+      setError(`Failed to update ${userType} data`);
+    }
+  };
+
+
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (!user) {
+    return <div>User not found</div>;
+  }
 
   return (
-    teacher && (
-      <div className="bg-profile"> 
-        <div className="profile-page">
-          <div className="profile-header">
-            <div className="avatar-container">
-              {/* Image (either selectedImage or default from teacher data) */}
-              <img src={selectedImage || teacher.image} alt="Profile Avatar" className="profile-avatar" />
-              
-              {/* Camera icon in bottom right */}
-              <label className="camera-icon">
-                <Camera className="w-5 h-5" />
-                <input 
-                  type="file" 
-                  accept="image/*" 
-                  onChange={handleImageChange} 
-                  style={{ display: 'none' }} 
-                />
-              </label>
-            </div>
-            
-            <h1>{teacher.first_name} {teacher.last_name}</h1>
-            <p>{teacher.country}</p>
-            <p className={`online-status ${teacher.onlineStatus === 'online' ? 'online' : 'offline'}`}>
-              {teacher.onlineStatus === 'online' ? '🟢 Online' : '⚪ Offline'}
-            </p>
+    <div className="bg-profile">
+      <div className="profile-page">
+        {/* Profile Header Section */}
+        <div className="profile-header">
+          <div className="avatar-container">
+            <img
+              src={user.profilePicture || user.image}
+              alt="Profile"
+              className="profile-avatar"
+            />
           </div>
-          <div className="profile-details">
-            <p className="inline-info"><strong>About Me: </strong>{teacher.teacher_desc}</p>
-            <p className="inline-info"><strong>Contact: </strong>{teacher.phone}</p>
-            <p className="inline-info"><strong>Subject: </strong>{teacher.subject_id}</p>
-            <p className="inline-info"><strong>Experience: </strong>{teacher.years_of_experience} years</p>
-            <p className="inline-info"><strong>Rating: </strong>{teacher.rating}</p>
-            <p className="inline-info"><strong>Gender: </strong>{teacher.gender}</p>
-          </div>
+          <h1>{user.first_name || user.firstName} {user.last_name || user.lastName}</h1>
+          <p className={`online-status ${user.onlineStatus === 'online' ? 'online' : 'offline'}`}>
+            Status: {user.onlineStatus}
+          </p>
         </div>
-      </div>   
-    )
+
+        {/* Edit Form Section */}
+        {isEditing ? (
+          <form >
+            {/* Common User Fields */}
+            <div>
+              <label>Country:</label>
+              <input
+                type="text"
+                name="country"
+                value={formData.country || ''}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label>Date of Birth:</label>
+              <input
+                type="date"
+                name="dateOfBirth"
+                value={formData.dateOfBirth ? formData.dateOfBirth.split('T')[0] : ''}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label>Bio:</label>
+              <textarea
+                name="bio"
+                value={formData.bio || ''}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label>Interests:</label>
+              <input
+                type="text"
+                name="interests"
+                value={formData.interests ? formData.interests.join(', ') : ''}
+                onChange={(e) => handleChange({ target: { name: 'interests', value: e.target.value.split(', ') } })}
+              />
+            </div>
+
+            {/* Additional fields for Teachers */}
+            {userType === 'teacher' && (
+              <div>
+                <h2>Teacher Details</h2>
+                <div>
+                  <label>Phone:</label>
+                  <input
+                    type="text"
+                    name="phone"
+                    value={formData.phone || ''}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div>
+                  <label>Subject:</label>
+                  <input
+                    type="text"
+                    name="subject_id"
+                    value={formData.subject_id || ''}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div>
+                  <label>Years of Experience:</label>
+                  <input
+                    type="number"
+                    name="years_of_experience"
+                    value={formData.years_of_experience || ''}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div>
+                  <label>Gender:</label>
+                  <select
+                    name="gender"
+                    value={formData.gender || ''}
+                    onChange={handleChange}
+                  >
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+            )}
+
+            <button type="submit" onClick={() => handleSubmit()}>Save</button>
+            <button type="button" onClick={() => setIsEditing(false)}>Cancel</button>
+          </form>
+        ) : (
+          <div className="profile-details">
+            {/* Displaying User Info */}
+            <p className="inline-info">Email: <strong>{userEmail}</strong></p>
+
+            <p className="inline-info">Country: <strong>{user.country}</strong></p>
+            <p className="inline-info">Date of Birth: <strong>{user.dateOfBirth ? new Date(user.dateOfBirth).toLocaleDateString() : 'Not provided'}</strong></p>
+            <p className="inline-info">Bio: <strong>{user.bio || 'No bio provided'}</strong></p>
+            <p className="inline-info">Interests: <strong>{user.interests ? user.interests.join(', ') : 'No interests provided'}</strong></p>
+
+            {/* Additional Info based on User Type */}
+            {userType === 'teacher' && (
+              <div>
+                <h2>Teacher Details</h2>
+                <p className="inline-info">Phone: <strong>{user.phone}</strong></p>
+                <p className="inline-info">Subject: <strong>{user.subject_id}</strong></p>
+                <p className="inline-info">Years of Experience: <strong>{user.years_of_experience}</strong></p>
+                <p className="inline-info">Gender: <strong>{user.gender}</strong></p>
+              </div>
+            )}
+
+            <button className='edit-profile-btn' onClick={() => setIsEditing(true)}>Edit Profile</button>
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 

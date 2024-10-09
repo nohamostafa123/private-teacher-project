@@ -6,6 +6,7 @@ import './style.css';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [userType, setUserType] = useState(''); // Default to Student
   const navigate = useNavigate();
 
   // Email validation regex
@@ -47,12 +48,13 @@ export default function Login() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({ email, password, userType }), // Include userType
         });
 
         const data = await response.json();
 
         if (data.success) {
+          console.log(data);
           Swal.fire({
             icon: 'success',
             title: 'Login successful!',
@@ -61,7 +63,11 @@ export default function Login() {
               confirmButton: 'custom-confirm',
             },
           }).then(() => {
+            // Store the user ID and login status in localStorage
+            localStorage.setItem('userId', data._id);  // Assuming the backend returns _id for user ID
             localStorage.setItem('loggedIn', 'true');
+
+            // Redirect to the home or profile page
             navigate('/');
           });
         } else {
@@ -72,7 +78,6 @@ export default function Login() {
       }
     }
   };
-
 
   return (
     <section className="register">
@@ -93,14 +98,31 @@ export default function Login() {
             <div className="row text-center">
               <div className="col-lg-12">
                 <div className="btn-group btn-group-toggle" data-toggle="buttons">
-                  <label className="btn btn-secondary active student-btn">
-                    <input type="radio" name="type" id="option2" value="1" autoComplete="off" defaultChecked className='radio-btn' /> Student
+                  <label className={`btn btn-secondary ${userType === 'student' ? 'active' : ''} student-btn`}>
+                    <input
+                      type="radio"
+                      name="type"
+                      value="student"
+                      autoComplete="off"
+                      checked={userType === 'student'}
+                      onChange={(e) => setUserType(e.target.value)} // Use onChange instead of onClick
+                      className="radio-btn"
+                    /> Student
                   </label>
-                  <label className="btn btn-secondary teacher-btn">
-                    <input type="radio" name="type" id="option1" value="2" autoComplete="off" className='radio-btn' /> Teacher
+                  <label className={`btn btn-secondary ${userType === 'teacher' ? 'active' : ''} teacher-btn`}>
+                    <input
+                      type="radio"
+                      name="type"
+                      value="teacher"
+                      autoComplete="off"
+                      checked={userType === 'teacher'}
+                      onChange={(e) => setUserType(e.target.value)} // Use onChange instead of onClick
+                      className="radio-btn"
+                    /> Teacher
                   </label>
                 </div>
               </div>
+
             </div>
             <br />
 

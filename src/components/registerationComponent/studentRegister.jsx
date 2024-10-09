@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './style.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function StudentRegister() {
   // State to store form input values
@@ -14,8 +15,9 @@ export default function StudentRegister() {
     country: '',
     password: '',
     confirmPassword: ''
-    
+
   });
+  const navigate = useNavigate();
 
   // Update state as user inputs data
   const handleInputChange = (e) => {
@@ -80,16 +82,20 @@ export default function StudentRegister() {
     try {
       const response = await axios.post('http://localhost:5000/api/students/register', formData);
       if (response.data.success) {
+        console.log(response.data);
         Swal.fire({
           icon: 'success',
-          title: 'Success',
-          text: 'Registration successful!',
+          title: 'Registration successful!',
+          text: 'Redirecting...',
           customClass: {
-            confirmButton: 'custom-confirm', // Apply custom class to confirm button
+            confirmButton: 'custom-confirm',
           },
-     
+
+
         });
+        navigate('/Login');
       }
+
     } catch (error) {
       showAlert('Registration failed. Please try again.');
     }
@@ -187,13 +193,13 @@ export default function StudentRegister() {
               />
               <span className="fa fa-lock"></span>
             </div>
-{/* <div className="form-group">
+            {/* <div className="form-group">
               <label>
                 <input type="checkbox" name="remember" className="form-control" />
                 Remember me
               </label>
             </div>*/}
-            
+
 
             <div className="form-group">
               <div className="g-recaptcha" data-sitekey="your-site-key"></div>

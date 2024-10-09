@@ -25,9 +25,10 @@ function App() {
           <Route path="/StudentRegister" element={<StudentRegister />} />
           <Route path="/TeacherRegister" element={<TeacherRegister />} />
           <Route path="/ContactApp" element={<ContactApp />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:id" element={<Profile />} />
+
           <Route path="/AdminDashboard" element={<AdminDashboard />} />
-      
+
 
         </Routes>
       </Router>
