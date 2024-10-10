@@ -3,10 +3,13 @@ import { Card, Form, ListGroup } from 'react-bootstrap';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setSpecialization } from '../redux/slices/filterSlice';
+import { useSelector } from 'react-redux';
 
 function Specializations() {
     const dispatch = useDispatch();
-    const [selectedSpecializations, setSelectedSpecializations] = useState([]);
+
+    const selectedSpecializationFromHome = useSelector((state) => state.filters.specialization);
+    const [selectedSpecializations, setSelectedSpecializations] = useState([selectedSpecializationFromHome]);
 
     const specializations = [
         { label: "Arabic", count: 108 },

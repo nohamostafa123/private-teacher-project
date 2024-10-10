@@ -1,8 +1,20 @@
 import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import './Category.css';
+import { useDispatch } from 'react-redux';
+import { setSpecialization } from '../teacherComponents/redux/slices/filterSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Category = ({ categories }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // Update: Function now takes a category parameter
+  const handelNavigateToTeacherPageToSearchSubject = (category) => {
+    navigate('/TeacherApp');
+    dispatch(setSpecialization(category.name));  // Use the specific category name
+  };
+
   return (
     <section className="category" id="category">
       <Container fluid>
@@ -32,7 +44,8 @@ const Category = ({ categories }) => {
                     </div>
                   </div>
                   <div className="hover">
-                    <Button className="center btn">Search</Button>
+                    {/* Pass the individual category to the function */}
+                    <Button className="center btn" onClick={() => handelNavigateToTeacherPageToSearchSubject(category)}>Search</Button>
                   </div>
                 </div>
               </div>
