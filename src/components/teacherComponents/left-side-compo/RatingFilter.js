@@ -3,10 +3,11 @@ import { Card, Form, ListGroup } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
-
-
+import { useDispatch } from 'react-redux';
+import { setRating } from '../redux/slices/filterSlice';
 
 function RatingFilter() {
+    const dispatch = useDispatch();
     const ratings = [
         { rating: 5.0, count: 7, filledStars: 5 },
         { rating: 4.5, count: 0, filledStars: 4.5 },
@@ -15,11 +16,14 @@ function RatingFilter() {
         { rating: 1.0, count: 2, filledStars: 1 }
     ];
 
+    const handleRatingChange = (rating) => {
+        dispatch(setRating(rating));
+    };
+
     return (
         <Card className="border-1 mb-4 px-3 py-4">
             <Card.Body>
-                <h5 className="card-title text-end">  Filter by rating
-                </h5>
+                <h5 className="card-title text-end">Filter by rating</h5>
                 <div className="underline bg-primary mb-4 ms-auto"></div>
                 <ListGroup variant="flush" className="list d-flex flex-row-reverse text-end">
                     <ul className="list-unstyled w-100">
@@ -35,7 +39,14 @@ function RatingFilter() {
                                         />
                                     ))}
                                 </div>
-                                <Form.Check type="radio" name="classification" className=" radio-rating" />
+                                <Form.Check
+                                    type="radio"
+                                    name="classification"
+                                    className="radio-rating"
+                                    onChange={() => handleRatingChange(rating.rating)} // Handle radio button change
+                                // Optionally, you can control the checked state based on your Redux state
+                                // checked={selectedRating === rating.rating}
+                                />
                             </li>
                         ))}
                     </ul>

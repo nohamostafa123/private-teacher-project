@@ -76,7 +76,11 @@ const Profile = () => {
 
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>
+      <h1>Loading...</h1>
+      <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="loading" />
+
+    </div>;
   }
 
   if (error) {
@@ -162,12 +166,26 @@ const Profile = () => {
                 </div>
                 <div>
                   <label>Subject:</label>
-                  <input
-                    type="text"
-                    name="subject_id"
-                    value={formData.subject_id || ''}
+                  <select
+                    name="subject"
+                    value={formData.subject || ''}
                     onChange={handleChange}
-                  />
+                  >
+                    <option value="Math">Math</option>
+                    <option value="English">English</option>
+                    <option value="Science">Science</option>
+                    <option value="History">History</option>
+                    <option value="Geography">Geography</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Biology">Biology</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Arabic">Arabic</option>
+                    <option value="French">French</option>
+                    <option value="Philosophy">Philosophy</option>
+                    <option value="Psychology">Psychology</option>
+
+
+                  </select>
                 </div>
                 <div>
                   <label>Years of Experience:</label>
@@ -190,10 +208,38 @@ const Profile = () => {
                     <option value="Other">Other</option>
                   </select>
                 </div>
+                <div>
+                  <label>Level:</label>
+                  <select
+                    name="level"
+                    value={formData.level || ''}
+                    onChange={handleChange}
+                  >
+                    <option value="All levels">All levels</option>
+                    <option value="Junior">Junior</option>
+                    <option value="Middle">Middle</option>
+                    <option value="Senior">Senior</option>
+
+                  </select>
+                </div>
+                <div>
+                  <label>Language:</label>
+                  <select
+                    name="language"
+                    value={formData.language || ''}
+                    onChange={handleChange}
+                  >
+                    <option value="All Languages">All Languages</option>
+                    <option value="English">English</option>
+                    <option value="Arabic">Arabic</option>
+
+                  </select>
+                </div>
               </div>
+
             )}
 
-            <button type="submit" onClick={handleSubmit}>Save</button> 
+            <button type="submit" onClick={handleSubmit}>Save</button>
             <button type="button" onClick={() => setIsEditing(false)}>Cancel</button>
           </form>
         ) : (
@@ -211,9 +257,11 @@ const Profile = () => {
               <div>
                 <h2>Teacher Details</h2>
                 <p className="inline-info">Phone: <strong>{user.phone}</strong></p>
-                <p className="inline-info">Subject: <strong>{user.subject_id}</strong></p>
+                <p className="inline-info">Subject: <strong>{user.subject}</strong></p>
                 <p className="inline-info">Years of Experience: <strong>{user.years_of_experience}</strong></p>
                 <p className="inline-info">Gender: <strong>{user.gender}</strong></p>
+                <p className="inline-info">Level: <strong>{user.level}</strong></p>
+                <p className="inline-info">Language: <strong>{user.language}</strong></p>
               </div>
             )}
 

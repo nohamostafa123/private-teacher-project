@@ -4,11 +4,13 @@ import TeacherCard from './TeacherCard';
 import { useSelector } from 'react-redux';
 import TeacherListCard from './Teacher-list-card';
 
+
 const TeachersSection = ({ currentPage, itemsPerPage }) => {
     const [teachers, setTeachers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const viewType = useSelector(state => state.layout.viewType);
+    const searchTerm = useSelector((state) => state.filters.search);
 
     useEffect(() => {
         const fetchTeachers = async () => {
@@ -34,6 +36,22 @@ const TeachersSection = ({ currentPage, itemsPerPage }) => {
         fetchTeachers();
     }, [currentPage, itemsPerPage]);
 
+    const { level = [], rating, specialization = [], language } = useSelector((state) => state.filters);
+
+    const filteredTeachers = teachers.filter((teacher) => {
+        return (
+            (level.length === 0 || level.includes(teacher.level)) &&
+            (rating ? teacher.rating >= rating : true) &&
+            (specialization.length > 0 ? specialization.includes(teacher.subject) : true) &&
+            (language ? teacher.language.includes(language) : true) &&
+            (searchTerm ?
+                teacher.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                teacher.last_name.toLowerCase().includes(searchTerm.toLowerCase()) :
+                true
+            )
+        );
+    });
+
     if (loading) {
         return <p>Loading...</p>;
     }
@@ -45,8 +63,7 @@ const TeachersSection = ({ currentPage, itemsPerPage }) => {
     const indexOfLastTeacher = currentPage * itemsPerPage;
     const indexOfFirstTeacher = indexOfLastTeacher - itemsPerPage;
 
-
-    const currentTeachers = Array.isArray(teachers) ? teachers.slice(indexOfFirstTeacher, indexOfLastTeacher) : [];
+    const currentTeachers = filteredTeachers.slice(indexOfFirstTeacher, indexOfLastTeacher);
 
     return (
         <div className="teachers-section container">

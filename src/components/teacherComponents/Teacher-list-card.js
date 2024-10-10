@@ -56,7 +56,7 @@ const TeacherListCard = ({ teacher }) => {
 
             <div className="teacher-image-container">
                 <img
-                    src={teacher.image || 'https://via.placeholder.com/150?text=No+Image'}
+                    src={teacher.profilePicture || 'https://via.placeholder.com/150?text=No+Image'}
                     alt={`${teacher.first_name} ${teacher.last_name}`}
                     className="teacher-image"
                 />
@@ -74,7 +74,7 @@ const TeacherListCard = ({ teacher }) => {
                 </div>
 
                 <div className="teacher-meta">
-                    <p className="mb-1"><FaGraduationCap className="me-2" /> Subject: {teacher.subject_id}</p>
+                    <p className="mb-1"><FaGraduationCap className="me-2" /> Subject: {teacher.subject}</p>
                     <p className='pipe' >|</p>
                     <p className="mb-1"><FaUserAlt className="me-2" /> Gender: {teacher.gender}</p>
                     <p className='pipe' >|</p>

@@ -7,7 +7,7 @@ const TeacherCard = ({ teacher }) => {
 
     useEffect(() => {
         const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-        setIsFavorited(savedFavorites.includes(teacher._id)); // Use _id from API response
+        setIsFavorited(savedFavorites.includes(teacher._id));
     }, [teacher._id]);
 
     const handleFavoriteClick = () => {
@@ -47,7 +47,7 @@ const TeacherCard = ({ teacher }) => {
             <div className="row g-0">
                 <div className="col-md-12 d-flex justify-content-center align-items-center teacher-image-container">
                     <img
-                        src={teacher.image || 'https://via.placeholder.com/150?text=No+Image'}
+                        src={teacher.profilePicture || 'https://via.placeholder.com/150?text=No+Image'}
                         alt={`${teacher.first_name} ${teacher.last_name}`}
                         className="teacher-image"
                     />
@@ -67,7 +67,7 @@ const TeacherCard = ({ teacher }) => {
                         </div>
 
                         <div className="teacher-meta mb-3">
-                            <p className="mb-1"><FaGraduationCap className="me-2" /> Subject: {teacher.subject_id}</p>
+                            <p className="mb-1"><FaGraduationCap className="me-2" /> Subject: {teacher.subject}</p>
                             <p className="mb-1"><FaPhoneAlt className="me-2" /> Phone: {teacher.phone}</p>
                             <p className="mb-1"><FaFlag className="me-2" /> Country: {teacher.country || 'Egypt'}</p>
                             <p className="mb-1"><FaUserAlt className="me-2" /> Gender: {teacher.gender}</p>
