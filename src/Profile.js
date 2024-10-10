@@ -193,7 +193,7 @@ const Profile = () => {
               </div>
             )}
 
-            <button type="submit" onClick={() => handleSubmit()}>Save</button>
+            <button type="submit" onClick={handleSubmit}>Save</button> 
             <button type="button" onClick={() => setIsEditing(false)}>Cancel</button>
           </form>
         ) : (
