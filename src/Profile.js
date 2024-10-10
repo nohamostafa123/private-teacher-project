@@ -43,7 +43,13 @@ const Profile = () => {
       [name]: value,
     }));
   };
-
+  // const handleInterestsChange = (e) => {
+  //   const interestsArray = e.target.value.split(',').map(item => item.trim());
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     interests: interestsArray,
+  //   }));
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -127,20 +133,20 @@ const Profile = () => {
               <label>Date of Birth:</label>
               <input
                 type="date"
-                name="dateOfBirth"
-                value={formData.dateOfBirth ? formData.dateOfBirth.split('T')[0] : ''}
+                name="date_of_birth"
+                value={formData.date_of_birth ? formData.date_of_birth.split('T')[0] : ''}
                 onChange={handleChange}
               />
             </div>
             <div>
               <label>Bio:</label>
               <textarea
-                name="bio"
-                value={formData.bio || ''}
+                name="teacher_desc"
+                value={formData.teacher_desc || ''}
                 onChange={handleChange}
               />
             </div>
-            <div>
+            {/* <div>
               <label>Interests:</label>
               <input
                 type="text"
@@ -148,7 +154,7 @@ const Profile = () => {
                 value={formData.interests ? formData.interests.join(', ') : ''}
                 onChange={(e) => handleChange({ target: { name: 'interests', value: e.target.value.split(', ') } })}
               />
-            </div>
+            </div> */}
 
             {/* Additional fields for Teachers */}
             {userType === 'teacher' && (
@@ -248,9 +254,9 @@ const Profile = () => {
             <p className="inline-info">Email: <strong>{userEmail}</strong></p>
 
             <p className="inline-info">Country: <strong>{user.country}</strong></p>
-            <p className="inline-info">Date of Birth: <strong>{user.dateOfBirth ? new Date(user.dateOfBirth).toLocaleDateString() : 'Not provided'}</strong></p>
-            <p className="inline-info">Bio: <strong>{user.bio || 'No bio provided'}</strong></p>
-            <p className="inline-info">Interests: <strong>{user.interests ? user.interests.join(', ') : 'No interests provided'}</strong></p>
+            <p className="inline-info">Date of Birth: <strong>{user.date_of_birth? new Date(user.date_of_birth).toLocaleDateString() : 'Not provided'}</strong></p>
+            <p className="inline-info">Bio: <strong>{user.teacher_desc || 'No bio provided'}</strong></p>
+            {/* <p className="inline-info">Interests: <strong>{user.interests ? user.interests.join(', ') : 'No interests provided'}</strong></p> */}
 
             {/* Additional Info based on User Type */}
             {userType === 'teacher' && (
