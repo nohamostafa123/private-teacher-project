@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { FaUserAlt, FaStar, FaRegStar, FaGraduationCap, FaHeart, FaRegHeart, FaFlag, FaHome, FaBriefcase, FaPhoneAlt } from 'react-icons/fa';
 import './component styles/TeacherCard.css';
+import { Link } from 'react-router-dom';
 
 const TeacherCard = ({ teacher }) => {
     const [isFavorited, setIsFavorited] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(false);
+    const charLimit = 10;
+
+    const handleReadMore = () => {
+        setIsExpanded(true);
+    };
 
     useEffect(() => {
         const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
@@ -57,9 +64,30 @@ const TeacherCard = ({ teacher }) => {
             <div className="row g-0">
                 <div className="col-md-12">
                     <div className="card-body">
-                        <h5 className="teacher-title">{teacher.teacher_desc}</h5>
+                        <h5 className="teacher-title">
+
+                            <>
+                                <h5>{`${teacher.teacher_desc.substring(0, charLimit)}`}
+                                    <span className='text-muted'>...</span>
+                                    <Link
+                                        to={`/teachers/${teacher._id}`} // navigate to the teacher's profile
+                                        onClick={handleReadMore}
+                                        className="read-more-link text-muted ms-2 fw-4 fs-6 "
+                                    >
+                                        Read More
+                                    </Link>
+                                </h5>
+
+
+                            </>
+
+
+
+                        </h5>
+
                         <h6 className="text-muted teacher-account">
-                            <FaUserAlt className="me-2 teacher-account" /> {`${teacher.first_name} ${teacher.last_name}`}   </h6>
+                            <FaUserAlt className="me-2 teacher-account" /> {`${teacher.first_name} ${teacher.last_name}`}
+                        </h6>
 
                         <div className="teacher-rating mb-3">
                             {renderStars(teacherRating)}
@@ -79,7 +107,7 @@ const TeacherCard = ({ teacher }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
