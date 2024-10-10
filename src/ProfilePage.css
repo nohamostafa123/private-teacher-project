@@ -53,6 +53,13 @@
   padding: 5px;
   cursor: pointer;
   color: white;
+
+}
+
+
+
+.camera-icon svg {
+  color: #cecccc;
 }
 
 /* User's name */
