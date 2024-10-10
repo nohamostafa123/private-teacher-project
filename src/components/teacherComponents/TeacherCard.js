@@ -47,7 +47,7 @@ const TeacherCard = ({ teacher }) => {
             <div className="row g-0">
                 <div className="col-md-12 d-flex justify-content-center align-items-center teacher-image-container">
                     <img
-                        src={teacher.profilePicture || 'https://via.placeholder.com/150?text=No+Image'}
+                        src={teacher.image || 'https://via.placeholder.com/150?text=No+Image'}
                         alt={`${teacher.first_name} ${teacher.last_name}`}
                         className="teacher-image"
                     />
