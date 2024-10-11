@@ -5,8 +5,12 @@ import Swal from 'sweetalert2';
 import axios from 'axios'; // Ensure axios is imported
 import './style.css';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 
 export default function TeacherRegister() {
+  const navigate = useNavigate();
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
@@ -18,7 +22,6 @@ export default function TeacherRegister() {
     subject_id: '',
     remember: false
   });
-  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -36,7 +39,7 @@ export default function TeacherRegister() {
       return false;
     }
 
-    const emailPattern = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
+    const emailPattern =/^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
     if (!email || !emailPattern.test(email)) {
       Swal.fire('Error', 'Please enter a valid email address', 'error');
       return false;
@@ -82,10 +85,8 @@ export default function TeacherRegister() {
             title: 'Registration successful!',
             text: 'Redirecting...',
             customClass: {
-              confirmButton: 'custom-confirm',
+              confirmButton: 'custom-confirm', // Apply custom class to confirm button
             },
-
-
           });
           navigate('/Login');
           setFormData({
@@ -98,7 +99,7 @@ export default function TeacherRegister() {
             repassword: '',
             subject_id: '',
             remember: false,
-
+         
           });
         } else {
           Swal.fire({
@@ -111,9 +112,9 @@ export default function TeacherRegister() {
           });
         }
       } catch (error) {
-        // <<<<<<< HEAD
-        //         console.log(error.response?.data); // تحقق من رسالة الخطأ القادمة من السيرفر
-        //         Swal.fire('Error', 'Registration failed. Please try again.', 'error');
+// <<<<<<< HEAD
+//         console.log(error.response?.data); // تحقق من رسالة الخطأ القادمة من السيرفر
+//         Swal.fire('Error', 'Registration failed. Please try again.', 'error');
 
         console.error('Registration error:', error); // Log the error
         Swal.fire('Error', error.response?.data?.message || 'Registration failed. Please try again.', 'error');
@@ -130,11 +131,11 @@ export default function TeacherRegister() {
               <img src="./images/logo.png" alt="Logo" />
               <div className="logo_title">
                 <h1>Private Teacher</h1>
-                <h3>Your best choice</h3>
+                <h3>{t('Your best choice')}</h3>
               </div>
             </a>
           </div>
-          <h4>Register as a teacher</h4>
+          <h4>{t('Register as a teacher')}</h4>
 
           <form onSubmit={handleSubmit}>
             <div className="form-group">
@@ -142,7 +143,7 @@ export default function TeacherRegister() {
                 type="text"
                 name="first_name"
                 className="form-control"
-                placeholder="First Name"
+                placeholder={t('First Name')}
                 value={formData.first_name}
                 onChange={handleInputChange}
               />
@@ -153,7 +154,7 @@ export default function TeacherRegister() {
                 type="text"
                 name="last_name"
                 className="form-control"
-                placeholder="Last Name"
+                placeholder={t('Last Name')}
                 value={formData.last_name}
                 onChange={handleInputChange}
               />
@@ -169,43 +170,43 @@ export default function TeacherRegister() {
                 onChange={handleInputChange}
               >
                 <option disabled value="">
-                  اختار اسم المادة
+                اختار اسم المادة
                 </option>
                 <option value="2" style={{ backgroundColor: '#1B62A4' }}>
-                  Arabic
+                {t('Arabic')}
                 </option>
                 <option value="26" style={{ backgroundColor: '#1B62A4' }}>
-                  Biology
+                {t('Biology')}
                 </option>
                 <option value="25" style={{ backgroundColor: '#1B62A4' }}>
-                  Chemistry
+                {t('Chemistry')}
                 </option>
                 <option value="3" style={{ backgroundColor: '#1B62A4' }}>
-                  English
+                {t('English')}
                 </option>
                 <option value="23" style={{ backgroundColor: '#1B62A4' }}>
-                  French
+                {t('French')}
                 </option>
                 <option value="7" style={{ backgroundColor: '#1B62A4' }}>
-                  Geography
+                {t('Geography')}
                 </option>
                 <option value="8" style={{ backgroundColor: '#1B62A4' }}>
-                  History
+                {t('History')}
                 </option>
                 <option value="6" style={{ backgroundColor: '#1B62A4' }}>
-                  Math
+                {t('Math')}
                 </option>
                 <option value="28" style={{ backgroundColor: '#1B62A4' }}>
-                  Philosophy
+                {t('Philosophy')}
                 </option>
                 <option value="24" style={{ backgroundColor: '#1B62A4' }}>
-                  Physics
+                {t('Physics')}
                 </option>
                 <option value="27" style={{ backgroundColor: '#1B62A4' }}>
-                  Psychology
+                {t('Psychology')}
                 </option>
                 <option value="5" style={{ backgroundColor: '#1B62A4' }}>
-                  Science
+                {t('Science')}
                 </option>
                 {/* Add other subjects here */}
               </select>
@@ -216,7 +217,7 @@ export default function TeacherRegister() {
                 type="email"
                 name="email"
                 className="form-control"
-                placeholder="E-mail"
+                placeholder={t('E-mail')}
                 value={formData.email}
                 onChange={handleInputChange}
               />
@@ -228,7 +229,7 @@ export default function TeacherRegister() {
                 type="text"
                 name="phone"
                 className="form-control"
-                placeholder="Phone"
+                placeholder={t('Phone')}
                 value={formData.phone}
                 onChange={handleInputChange}
                 onInput={(e) => {
@@ -244,7 +245,7 @@ export default function TeacherRegister() {
                 required
                 className="form-control"
                 rows="5"
-                placeholder="Your description"
+                placeholder={t('Your description')}
                 value={formData.teacher_desc}
                 onChange={handleInputChange}
               ></textarea>
@@ -256,7 +257,7 @@ export default function TeacherRegister() {
                 type="password"
                 name="password"
                 className="form-control"
-                placeholder="Password"
+                placeholder={t('Password')}
                 value={formData.password}
                 onChange={handleInputChange}
               />
@@ -268,13 +269,13 @@ export default function TeacherRegister() {
                 type="password"
                 name="repassword"
                 className="form-control"
-                placeholder="Confirm Password"
+                placeholder={t('Confirm Password')}
                 value={formData.repassword}
                 onChange={handleInputChange}
               />
               <span className="fa fa-lock"></span>
             </div>
-            {/*<div className="form-group">
+{/*<div className="form-group">
               <label>
                 <input
                   type="checkbox"
@@ -286,15 +287,15 @@ export default function TeacherRegister() {
                 Remember me
               </label>
             </div>*/}
-
+            
 
             <div className="form-group">
-              <input type="submit" className="btn" value="Register" />
+              <input type="submit" className="btn" value={t('Register')}/>
             </div>
           </form>
 
           <h6>
-            I already have an account <a href="/Login">Login</a>
+          {t('I already have an account')} <a href="/Login">{t('Login')}</a>
           </h6>
         </div>
       </div>

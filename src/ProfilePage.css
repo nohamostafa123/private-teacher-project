@@ -23,7 +23,6 @@
   text-align: center;
   margin-bottom: 30px;
 }
-
 /* Avatar container to align profile picture and camera icon */
 .profile-page .avatar-container {
   position: relative;
@@ -46,17 +45,15 @@
 /* Camera icon for profile picture upload */
 .profile-page .camera-icon {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 10px; /* Adjust the top value as needed to place it higher */
+  right: 10px; /* Keep it to the right */
   background-color: rgba(0, 0, 0, 0.7);
   border-radius: 50%;
   padding: 5px;
   cursor: pointer;
   color: white;
-
+  z-index: 10; /* Ensure it stays on top of the profile image */
 }
-
-
 
 .camera-icon svg {
   color: #cecccc;
@@ -121,7 +118,12 @@
 }
 
 .profile-page button[type="submit"] {
-  background-color: #28a745;
+  background-image: -webkit-linear-gradient(
+    150deg,
+    rgb(3, 81, 156) 0%,
+    rgb(49, 117, 182) 51%,
+    rgb(94, 152, 207) 100%
+  );
   color: white;
 }
 
@@ -164,7 +166,12 @@
 }
 
 .profile-page .edit-profile-btn {
-  background-color: #28a745 !important;
+  background-image: -webkit-linear-gradient(
+    150deg,
+    rgb(3, 81, 156) 0%,
+    rgb(49, 117, 182) 51%,
+    rgb(94, 152, 207) 100%
+  );
   color: white !important;
   padding: 10px 40px !important;
   border: none !important;

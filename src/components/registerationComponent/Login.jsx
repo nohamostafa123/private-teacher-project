@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
+import { useTranslation } from 'react-i18next';
 
 export default function Login() {
+  const { t } = useTranslation(); // Use the translation hook
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userType, setUserType] = useState(''); // Default to Student
+  const [userType, setUserType] = useState('');
   const navigate = useNavigate();
 
   // Email validation regex
@@ -21,6 +23,9 @@ export default function Login() {
       icon: 'error',
       title: 'Invalid Input',
       text: message,
+      customClass: {
+              confirmButton: 'custom-confirm',
+            },
     });
   };
 
@@ -54,6 +59,7 @@ export default function Login() {
         const data = await response.json();
 
         if (data.success) {
+         
           console.log(data);
           Swal.fire({
             icon: 'success',
@@ -63,12 +69,11 @@ export default function Login() {
               confirmButton: 'custom-confirm',
             },
           }).then(() => {
-            // Store the user ID and login status in localStorage
-            localStorage.setItem('userId', data._id);  // Assuming the backend returns _id for user ID
-            localStorage.setItem('loggedIn', 'true');
-
-            // Redirect to the home or profile page
-            navigate('/');
+              // Store the user ID and login status in localStorage
+              localStorage.setItem('userId', data._id);  // Assuming the backend returns _id for user ID
+              localStorage.setItem('loggedIn', 'true');
+              // Redirect to the home or profile page
+              navigate('/');
           });
         } else {
           showAlert(data.message); // Show error message from backend
@@ -79,6 +84,7 @@ export default function Login() {
     }
   };
 
+
   return (
     <section className="register">
       <div className="container-fluid">
@@ -88,41 +94,40 @@ export default function Login() {
               <img src="./images/logo.png" alt="Logo" />
               <div className="logo_title">
                 <h1> Private Teacher</h1>
-                <h3>Your best choice</h3>
+                <h3>{t('Your best choice')}</h3>
               </div>
             </a>
           </div>
-          <h4>Login</h4>
+          <h4>{t('Login')}</h4>
 
           <form onSubmit={handleSubmit} method="POST">
             <div className="row text-center">
               <div className="col-lg-12">
                 <div className="btn-group btn-group-toggle" data-toggle="buttons">
-                  <label className={`btn btn-secondary ${userType === 'student' ? 'active' : ''} student-btn`}>
-                    <input
-                      type="radio"
-                      name="type"
-                      value="student"
-                      autoComplete="off"
-                      checked={userType === 'student'}
-                      onChange={(e) => setUserType(e.target.value)} // Use onChange instead of onClick
-                      className="radio-btn"
-                    /> Student
-                  </label>
-                  <label className={`btn btn-secondary ${userType === 'teacher' ? 'active' : ''} teacher-btn`}>
-                    <input
-                      type="radio"
-                      name="type"
-                      value="teacher"
-                      autoComplete="off"
-                      checked={userType === 'teacher'}
-                      onChange={(e) => setUserType(e.target.value)} // Use onChange instead of onClick
-                      className="radio-btn"
-                    /> Teacher
+                <label className={`btn btn-secondary ${userType === 'student' ? 'active' : ''} student-btn`}>
+                <input
+                  type="radio"
+                  name="type"
+                  value="student"
+                  autoComplete="off"
+                  checked={userType === 'student'}
+                  onChange={(e) => setUserType(e.target.value)} // Use onChange instead of onClick
+                  className="radio-btn"
+                /> {t('Student')}
+                 </label>
+                 <label className={`btn btn-secondary ${userType === 'teacher' ? 'active' : ''} teacher-btn`}>
+                 <input
+                   type="radio"
+                   name="type"
+                   value="teacher"
+                   autoComplete="off"
+                   checked={userType === 'teacher'}
+                   onChange={(e) => setUserType(e.target.value)} // Use onChange instead of onClick
+                   className="radio-btn"
+                 />{t('Teacher')} 
                   </label>
                 </div>
               </div>
-
             </div>
             <br />
 
@@ -133,7 +138,7 @@ export default function Login() {
                 className="form-control"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="E-mail"
+                placeholder={t('E-mail')}
                 required
               />
               <span className="fa fa-envelope"></span>
@@ -146,21 +151,21 @@ export default function Login() {
                 className="form-control"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
+                placeholder={t('Password')}
                 required
               />
               <span className="fa fa-lock"></span>
             </div>
 
             <div className="form-group">
-              <input type="submit" className="btn" value="Login" />
+              <input type="submit" className="btn" value={t('Login')} />
             </div>
           </form>
 
           <h6>
-            You do not have an account |{' '}
-            <a href="/StudentRegister">Register as a student</a> |{' '}
-            <a href="/TeacherRegister">Register as teacher</a>
+          {t('You do not have an account')} |{' '}
+            <a href="/StudentRegister">{t('Register as Student')}</a> |{' '}
+            <a href="/TeacherRegister">{t('Register as Teacher')}</a>
           </h6>
         </div>
       </div>

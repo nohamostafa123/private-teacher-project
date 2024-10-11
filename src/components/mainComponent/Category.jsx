@@ -1,33 +1,35 @@
 import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import './Category.css';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { setSpecialization } from '../teacherComponents/redux/slices/filterSlice';
 import { useNavigate } from 'react-router-dom';
 
+
 const Category = ({ categories }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   // Update: Function now takes a category parameter
   const handelNavigateToTeacherPageToSearchSubject = (category) => {
     navigate('/TeacherApp');
     dispatch(setSpecialization(category.name));  // Use the specific category name
   };
 
+  const { t } = useTranslation();
   return (
     <section className="category" id="category">
       <Container fluid>
         <Row className="align-items-center">
           <Col md={10} sm={9} xs={9}>
             <div className="title">
-              <span>Categories</span>
-              <h1>Teachers Majors</h1>
+              <span>{t('Categories')}</span>
+              <h1>{t('Teachers Majors')}</h1>
               <hr />
             </div>
           </Col>
           <Col md={2} sm={3} xs={3} className="text-end">
-            <Button className="more">All Categories</Button>
+            <Button className="more">{t('All Categories')}</Button>
           </Col>
         </Row>
 
@@ -40,12 +42,11 @@ const Category = ({ categories }) => {
                   <div className="img_overlay">
                     <div className="text center">
                       <h1>{category.name}</h1>
-                      <h3>teachers {category.teacherCount}</h3>
+                      <h3>{t('teachers')} {category.teacherCount}</h3>
                     </div>
                   </div>
                   <div className="hover">
-                    {/* Pass the individual category to the function */}
-                    <Button className="center btn" onClick={() => handelNavigateToTeacherPageToSearchSubject(category)}>Search</Button>
+                  <Button className="center btn" onClick={() => handelNavigateToTeacherPageToSearchSubject(category)}>{t('Search')} </Button>
                   </div>
                 </div>
               </div>
@@ -54,7 +55,7 @@ const Category = ({ categories }) => {
         </Row>
 
         <Col md={12} sm={12} xs={12} className="text-center">
-          <Button className="more2">All Categories</Button>
+          <Button className="more2">{t('All Categories')}</Button>
         </Col>
       </Container>
     </section>

@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import './style.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 export default function StudentRegister() {
+  const navigate = useNavigate();
+  const { t } = useTranslation(); // Use the translation hook
   // State to store form input values
   const [formData, setFormData] = useState({
     firstName: '',
@@ -15,9 +18,8 @@ export default function StudentRegister() {
     country: '',
     password: '',
     confirmPassword: ''
-
+    
   });
-  const navigate = useNavigate();
 
   // Update state as user inputs data
   const handleInputChange = (e) => {
@@ -88,14 +90,12 @@ export default function StudentRegister() {
           title: 'Registration successful!',
           text: 'Redirecting...',
           customClass: {
-            confirmButton: 'custom-confirm',
+            confirmButton: 'custom-confirm', // Apply custom class to confirm button
           },
-
-
+     
         });
         navigate('/Login');
       }
-
     } catch (error) {
       showAlert('Registration failed. Please try again.');
     }
@@ -110,11 +110,11 @@ export default function StudentRegister() {
               <img src="./images/logo.png" alt="Logo" />
               <div className="logo_title">
                 <h1>Private Teacher</h1>
-                <h3>Your best choice</h3>
+                <h3>{t('Your best choice')}</h3>
               </div>
             </a>
           </div>
-          <h4>Register as a student</h4>
+          <h4>{t('Register as Student')}</h4>
 
           <form onSubmit={handleSubmit}>
             <div className="form-group">
@@ -122,7 +122,7 @@ export default function StudentRegister() {
                 type="text"
                 name="firstName"
                 className="form-control"
-                placeholder="First Name"
+                placeholder={t('First Name')}
                 value={formData.firstName}
                 onChange={handleInputChange}
               />
@@ -134,7 +134,7 @@ export default function StudentRegister() {
                 type="text"
                 name="lastName"
                 className="form-control"
-                placeholder="Last Name"
+                placeholder={t('Last Name')}
                 value={formData.lastName}
                 onChange={handleInputChange}
               />
@@ -146,7 +146,7 @@ export default function StudentRegister() {
                 type="email"
                 name="email"
                 className="form-control"
-                placeholder="E-mail"
+                placeholder={t('E-mail')}
                 value={formData.email}
                 onChange={handleInputChange}
               />
@@ -175,7 +175,7 @@ export default function StudentRegister() {
                 type="password"
                 name="password"
                 className="form-control"
-                placeholder="Password"
+                placeholder={t('Password')}
                 value={formData.password}
                 onChange={handleInputChange}
               />
@@ -187,19 +187,19 @@ export default function StudentRegister() {
                 type="password"
                 name="confirmPassword"
                 className="form-control"
-                placeholder="Confirm Password"
+                placeholder={t('Confirm Password')}
                 value={formData.confirmPassword}
                 onChange={handleInputChange}
               />
               <span className="fa fa-lock"></span>
             </div>
-            {/* <div className="form-group">
+{/* <div className="form-group">
               <label>
                 <input type="checkbox" name="remember" className="form-control" />
                 Remember me
               </label>
             </div>*/}
-
+            
 
             <div className="form-group">
               <div className="g-recaptcha" data-sitekey="your-site-key"></div>
@@ -212,7 +212,7 @@ export default function StudentRegister() {
           </form>
 
           <h6>
-            I already have an account <a href="/">Login</a>
+          {t('You do not have an account')} <a href="/">{t('Login')}</a>
           </h6>
         </div>
       </div>

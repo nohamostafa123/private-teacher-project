@@ -15,6 +15,8 @@ const Profile = () => {
   const [formData, setFormData] = useState({});
   const iid = localStorage.getItem("userId");
 
+  const [image, setImage] = useState(null); // State for the uploaded image
+
   const fetchUserData = async () => {
     try {
       const response = await axios.get(
@@ -35,6 +37,12 @@ const Profile = () => {
 
   useEffect(() => {
     fetchUserData();
+
+    // Load image from localStorage when the component mounts
+    const savedImage = localStorage.getItem("profileImage");
+    if (savedImage) {
+      setImage(savedImage);
+    }
   }, [iid]);
 
   const handleChange = (e) => {
@@ -44,13 +52,19 @@ const Profile = () => {
       [name]: value,
     }));
   };
-  // const handleInterestsChange = (e) => {
-  //   const interestsArray = e.target.value.split(',').map(item => item.trim());
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     interests: interestsArray,
-  //   }));
-  // };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const imageBase64 = event.target.result;
+        setImage(imageBase64);
+        localStorage.setItem("profileImage", imageBase64); // Save image to localStorage
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -107,13 +121,18 @@ const Profile = () => {
         <div className="profile-header">
           <div className="avatar-container">
             <img
-              src={user.profilePicture || user.image}
+              src={image || user.profilePicture || user.image}
               alt="Profile"
               className="profile-avatar"
             />
             <label className="camera-icon">
               <Camera className="w-5 h-5" />
-              <input type="file" accept="image/*" style={{ display: "none" }} />
+              <input 
+                type="file" 
+                accept="image/*" 
+                onChange={handleImageChange} 
+                style={{ display: "none" }} 
+              />
             </label>
           </div>
           <h1>
@@ -129,6 +148,7 @@ const Profile = () => {
           </p>
         </div>
 
+       
         {/* Edit Form Section */}
         {isEditing ? (
           <form>

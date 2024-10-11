@@ -293,7 +293,7 @@ select.form-control option {
 select.form-control option:hover {
   background-color: #f1f1f1; /* Light background on hover */
 }
-.radio-btn {
+.radio-btn{
   display: none;
 }
 .custom-confirm {
