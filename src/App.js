@@ -4,6 +4,7 @@ import Home from './Home.js';
 import TeacherApp from './TeacherApp.js';
 import AboutApp from './AboutApp.js';
 import Login from './components/registerationComponent/Login';
+import TeacherDetails from './TeacherDetails.js';
 import Profile from './Profile.js';
 import StudentRegister from './components/registerationComponent/studentRegister'
 import TeacherRegister from './components/registerationComponent/teacherRegister';
@@ -26,7 +27,7 @@ function App() {
           <Route path="/TeacherRegister" element={<TeacherRegister />} />
           <Route path="/ContactApp" element={<ContactApp />} />
           <Route path="/profile/:id" element={<Profile />} />
-
+          <Route path="/teacher/:id" element={<TeacherDetails />} />
           <Route path="/AdminDashboard" element={<AdminDashboard />} />
 
 

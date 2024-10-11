@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './component styles/card-list.css';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Link } from 'react-router-dom';
 import {
     FaStar,
     FaRegStar,
@@ -13,16 +15,12 @@ import {
     FaPhoneAlt
 } from 'react-icons/fa';
 import './component styles/TeacherCard.css';
-import { Link } from 'react-router-dom';
 
-const TeacherListCard = ({ teacher }) => {
+    const TeacherListCard = ({ teacher }) => {
     const [isFavorited, setIsFavorited] = useState(false);
-    const [isExpanded, setIsExpanded] = useState(false);
     const charLimit = 20;
+    const navigate = useNavigate(); // Initialize useNavigate
 
-    const handleReadMore = () => {
-        setIsExpanded(true);
-    };
     useEffect(() => {
         const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
         setIsFavorited(savedFavorites.includes(teacher._id));
@@ -53,41 +51,37 @@ const TeacherListCard = ({ teacher }) => {
             </>
         );
     };
-
+ const handleNavigate = () => {
+        navigate(`/teacher/${teacher._id}`); // Navigate to the teacher details page with the teacher's ID
+    };
     return (
         <div className="teacher-card">
             <button className="position-absolute top-0 end-0 m-2 favorite-button p-2 rounded-circle" onClick={handleFavoriteClick}>
                 {isFavorited ? <FaHeart className="heart-icon filled-heart-icon" /> : <FaRegHeart className="heart-icon" />}
             </button>
 
-            <div className="teacher-image-container">
+            <div className="teacher-image-container" onClick={handleNavigate} style={{ cursor: 'pointer' }}>
                 <img
-                    src={teacher.image || 'https://via.placeholder.com/150?text=No+Image'}
+                       src={teacher.image || 'https://via.placeholder.com/150?text=No+Image' }
                     alt={`${teacher.first_name} ${teacher.last_name}`}
                     className="teacher-image"
                 />
             </div>
 
             <div className="card-body">
-                <h5 className="teacher-title">
-
+                 <h5 className="teacher-title">
                     <>
                         <h5>{`${teacher.teacher_desc.substring(0, charLimit)}`}
                             <span className='text-muted'>...</span>
                             <Link
-                                to={`/teachers/${teacher._id}`} // navigate to the teacher's profile
-                                onClick={handleReadMore}
-                                className="read-more-link text-muted ms-2 fw-4 fs-6 "
+                                to={`/teacher/${teacher._id}`} // navigate to the teacher's profile
+                                onClick={handleNavigate} style={{ cursor: 'pointer' }}
+                                className="read-more-link text-muted ms-2 fw-4 fs-6 " 
                             >
                                 Read More
                             </Link>
                         </h5>
-
-
                     </>
-
-
-
                 </h5>
                 <h6 className="text-muted teacher-account">
                     <FaUserAlt className="me-2 teacher-account" /> {`${teacher.first_name} ${teacher.last_name}`}
@@ -114,7 +108,7 @@ const TeacherListCard = ({ teacher }) => {
                 </div>
                 <div className='contact-button-container'>
 
-                    <button className="contact-button ">Contact</button>
+                    <button className="contact-button "onClick={handleNavigate} style={{ cursor: 'pointer' }}>Contact</button>
                 </div>
             </div>
         </div>

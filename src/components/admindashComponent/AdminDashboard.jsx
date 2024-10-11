@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Form, Table } from 'react-bootstrap';
 import './AdminDashboard.css'; 
+import { useTranslation } from 'react-i18next';
 
 const AdminDashboard = () => {
+  const { t, i18n } = useTranslation();
   const initialCategories = [
     { name: 'Arabic', teacherCount: 66, imgSrc: './images/عربي.jpeg', delay: '0.15s' },
     { name: 'Biology', teacherCount: 90, imgSrc: './images/احياء.jpeg', delay: '0.35s' },
@@ -57,7 +59,7 @@ const AdminDashboard = () => {
 
   return (
     <Container fluid className="admin-dashboard">
-      <h1 className="text-center my-4">Admin Dashboard</h1>
+      <h1 className="text-center my-4">{t('Admin Dashboard')}</h1>
 
       <Row>
         <Col>
@@ -65,10 +67,10 @@ const AdminDashboard = () => {
             <thead>
               <tr>
                 <th>#</th>
-                <th>Subject Name</th>
-                <th>Teacher Count</th>
-                <th>Image</th>
-                <th>Actions</th>
+                <th>{t('Subject Name')}</th>
+                <th>{t('Teacher Count')}</th>
+                <th>{t('Image')}</th>
+                <th>{t('Actions')}</th>
               </tr>
             </thead>
             <tbody>
@@ -81,7 +83,7 @@ const AdminDashboard = () => {
                     <img src={category.imgSrc} alt={category.name} style={{ width: '50px', height: '50px' }} />
                   </td>
                   <td>
-                    <Button variant="danger" onClick={() => handleDeleteCategory(index)}>Delete</Button>
+                    <Button variant="danger" onClick={() => handleDeleteCategory(index)}>{t('Delete')}</Button>
                   </td>
                 </tr>
               ))}
@@ -92,20 +94,20 @@ const AdminDashboard = () => {
 
       <Row className="mt-4">
         <Col md={6} className="offset-md-3">
-          <h3>Add New Subject</h3>
+          <h3>{t('Add New Subject')}</h3>
           <Form onSubmit={handleAddCategory}>
             <Form.Group>
-              <Form.Label>Subject Name</Form.Label>
+              <Form.Label>{t('Subject Name')}</Form.Label>
               <Form.Control
                 type="text"
                 value={newCategory.name}
                 onChange={(e) => setNewCategory({ ...newCategory, name: e.target.value })}
-                placeholder="Enter subject name"
+                placeholder={t('Enter subject name')}
                 required
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Teacher Count</Form.Label>
+              <Form.Label>{t('Teacher Count')}</Form.Label>
               <Form.Control
                 type="number"
                 value={newCategory.teacherCount}
@@ -115,7 +117,7 @@ const AdminDashboard = () => {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Upload Image</Form.Label>
+              <Form.Label>{t('Upload Image')}</Form.Label>
               <Form.Control type="file" onChange={handleImageChange} required />
             </Form.Group>
 
@@ -125,7 +127,7 @@ const AdminDashboard = () => {
               </div>
             )}
 
-            <Button type="submit" className="mt-3">Add Subject</Button>
+            <Button type="submit" className="mt-3">{t('Add Subject')}</Button>
           </Form>
         </Col>
       </Row>

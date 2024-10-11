@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import './MyNav.css';
 import bcrypt from 'bcryptjs';
 import Swal from 'sweetalert2';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faGlobe, faUser, faTimes, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link, useNavigate } from 'react-router-dom';
 import { faFacebookF, faTwitter, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { useTranslation } from 'react-i18next';
+
 
 const MyNav = ({ isAuthenticated }) => {
+  const { t, i18n } = useTranslation();
   const [sideNavOpen, setSideNavOpen] = useState(false);
   const [showToggle, setShowToggle] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -21,7 +24,6 @@ const MyNav = ({ isAuthenticated }) => {
     const storedUserId = localStorage.getItem('userId');
     setUserId(storedUserId);
   }, []);
-
   useEffect(() => {
     // Update userId when isLoggedIn changes
     const storedUserId = localStorage.getItem('userId');
@@ -34,6 +36,7 @@ const MyNav = ({ isAuthenticated }) => {
     setIsLoggedIn(false);
     setUserId(null);
   };
+
   const openNav = () => {
     setSideNavOpen(true);
     setShowToggle(false);
@@ -65,9 +68,12 @@ const MyNav = ({ isAuthenticated }) => {
   const toggleSubmenu = () => {
     setIsSubmenuVisible(!isSubmenuVisible);
   };
+  
 
   const handleAdminAccess = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
+   
+  
     const { value: password } = await Swal.fire({
       title: 'Enter Admin Password',
       input: 'password',
@@ -77,12 +83,13 @@ const MyNav = ({ isAuthenticated }) => {
       confirmButtonText: 'Enter',
       cancelButtonText: 'Cancel',
       customClass: {
-        confirmButton: 'custom-confirm',
+        confirmButton: 'custom-confirm',  
       },
     });
-
+  
     if (password) {
       const passwordMatch = await bcrypt.compare(password, hashedPassword);
+  
       if (passwordMatch) {
         navigate('/AdminDashboard');
       } else {
@@ -91,76 +98,85 @@ const MyNav = ({ isAuthenticated }) => {
           title: 'Incorrect Password',
           text: 'Access denied.',
           customClass: {
-            confirmButton: 'custom-confirm',
-          },
+        confirmButton: 'custom-confirm',  
+      },
         });
       }
     }
   };
-
+  const toggleLanguage = () => {
+    const newLang = i18n.language === 'en' ? 'ar' : 'en';
+    
+    i18n.changeLanguage(newLang);
+    localStorage.setItem('i18nextLng', newLang);
+    //document.body.dir = newLang === 'ar' ? 'rtl' : 'ltr';
+  };
+  
   return (
     <section className="header">
-      <div className="container-fluid">
-        <div className="navigation">
-          <div className="row">
-            <div className="col-md-2 col-sm-6 col-xs-6">
-              <div className="d-inline-flex row-md-2 row-sm-6">
-                <div className="d-inline-flex logo">
-                  <Link to="/">
-                    <img src="./images/logo.png" alt="Logo" />
-                    <div className="logo_title">
-                      <h1>Private Teacher</h1>
-                      <h3>Your best choice</h3>
-                    </div>
-                  </Link>
-                </div>
+    <div className="container-fluid">
+      <div className="navigation">
+        <div className="row">
+          <div className="col-md-2 col-sm-6 col-xs-6">
+            <div className="d-inline-flex row-md-2 row-sm-6">
+              <div className="d-inline-flex logo">
+                <Link to="/">
+                  <img src="./images/logo.png" alt="Logo" />
+                  <div className="logo_title">
+                    <h1>Private Teacher</h1>
+                    <h3>{t('Your best choice')}</h3>
+
+                  </div>
+                </Link>
               </div>
             </div>
+          </div>
 
-            <div className="col-md-8 col-sm-6 col-xs-6">
-              <FontAwesomeIcon icon={faBars} className="clicker fa-2x" />
-              <div className="header_top hidden-sm hidden-xs right">
-                <ul className="list-inline right">
-                  {isLoggedIn ? (
-                    <>
-                      <li>
-                        <Link to={`/profile/${userId}`}>
-                          <FontAwesomeIcon icon={faUser} /> Profile
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/Login" onClick={handleLogout}>
-                          <FontAwesomeIcon icon={faSignOutAlt} /> Log out
-                        </Link>
-                      </li>
-                    </>
-                  ) : (
-                    <>
-                      <li>
-                        <Link to="/login">
-                          <FontAwesomeIcon icon={faUser} /> Login
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/StudentRegister">
-                          <FontAwesomeIcon icon={faUser} /> Register as Student
-                        </Link>
-                      </li>
-                    </>
-                  )}
-                </ul>
+          <div className="col-md-8 col-sm-6 col-xs-6">
+            <FontAwesomeIcon icon={faBars} className="clicker fa-2x" />
+            <div className="header_top hidden-sm hidden-xs right">
+              <ul className="list-inline right">
+                {/* Conditionally show login/profile based on authentication */}
+                {isLoggedIn ? (
+                  <>
+                    <li>
+                      <Link to={`/profile/${userId}`}>
+                        <FontAwesomeIcon icon={faUser} />  {t('Profile')}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/Login" onClick={handleLogout}>
+                      <FontAwesomeIcon icon={faSignOutAlt} />{t('Log out')} 
+                      </Link>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <Link to="/login">
+                        <FontAwesomeIcon icon={faUser} /> {t('Login')}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/StudentRegister">
+                        <FontAwesomeIcon icon={faUser} />{t('Register as Student')} 
+                      </Link>
+                    </li>
+                  </>
+                )}
+              </ul>
 
-                <ul className="social-icons left">
-                  <li className="dropdown" onClick={toggleSubmenu} style={{ cursor: 'pointer' }}>
-                    <FontAwesomeIcon icon={faGlobe} /> English |
-                    <div id="lan_sub" className={`sub_menu ${isSubmenuVisible ? 'visible' : ''}`}>
-                      <ul>
-                        <li>
-                          <a href="#">اللغة العربية</a>
-                        </li>
-                      </ul>
-                    </div>
+              <ul className="social-icons left">
+              <li className="dropdown" onClick={toggleSubmenu} style={{ cursor: 'pointer' }}>
+              <FontAwesomeIcon icon={faGlobe} /> {t('english')} |
+              <div id="lan_sub" className={`sub_menu ${isSubmenuVisible ? 'visible' : ''}`}>
+                <ul>
+                  <li>
+                    <a href="#" onClick={toggleLanguage}>{t('arabic')}</a>
                   </li>
+                </ul>
+              </div>
+            </li>
                   <li className="fab">
                     <a href="#">
                       <FontAwesomeIcon icon={faFacebookF} />

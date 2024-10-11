@@ -4,7 +4,6 @@ import TeacherCard from './TeacherCard';
 import { useSelector } from 'react-redux';
 import TeacherListCard from './Teacher-list-card';
 
-
 const TeachersSection = ({ currentPage, itemsPerPage }) => {
     const [teachers, setTeachers] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -35,9 +34,7 @@ const TeachersSection = ({ currentPage, itemsPerPage }) => {
 
         fetchTeachers();
     }, [currentPage, itemsPerPage]);
-
     const { level = [], rating, specialization = [], language } = useSelector((state) => state.filters);
-
     const filteredTeachers = teachers.filter((teacher) => {
         return (
             (level.length === 0 || level.includes(teacher.level)) &&
@@ -64,7 +61,6 @@ const TeachersSection = ({ currentPage, itemsPerPage }) => {
     const indexOfFirstTeacher = indexOfLastTeacher - itemsPerPage;
 
     const currentTeachers = filteredTeachers.slice(indexOfFirstTeacher, indexOfLastTeacher);
-
     return (
         <div className="teachers-section container">
             <div className="row">

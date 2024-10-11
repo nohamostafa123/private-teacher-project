@@ -1,29 +1,51 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Form, ListGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { setLevel } from '../redux/slices/filterSlice';
+import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 function Levels() {
-    const levels = [
-        { label: "All levels", count: 823 },
-        { label: "Junior", count: 11 },
-        { label: "Middle", count: 27 },
-        { label: "Senior", count: 234 }
-    ];
-
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const [selectedLevels, setSelectedLevels] = useState([]);
+    const [levelCounts, setLevelCounts] = useState({
+        all: 0,
+        junior: 0,
+        middle: 0,
+        senior: 0
+    });
+
+    useEffect(() => {
+        // Fetch the teacher counts from the backend
+        const fetchTeacherCounts = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/api/teachers/teacher-counts'); // Assuming your endpoint is /api/teacher-counts
+                setLevelCounts(response.data);
+            } catch (error) {
+                console.error('Error fetching teacher counts', error);
+            }
+        };
+
+        fetchTeacherCounts();
+    }, []);
+
+  
+    const levels = [
+        { label: "All levels", count: levelCounts.all },
+        { label: "Junior", count: levelCounts.junior },
+        { label: "Middle", count: levelCounts.middle },
+        { label: "Senior", count: levelCounts.senior }
+    ];
 
     const handleLevelChange = (event, levelLabel) => {
         if (levelLabel === "All levels") {
-
             if (event.target.checked) {
                 const allLevels = levels.map((level) => level.label);
                 setSelectedLevels(allLevels);
                 dispatch(setLevel(allLevels));
             } else {
-
                 setSelectedLevels([]);
                 dispatch(setLevel([]));
             }
@@ -32,7 +54,6 @@ function Levels() {
             const updatedLevels = event.target.checked
                 ? [...selectedLevels.filter(l => l !== "All levels"), levelLabel]
                 : selectedLevels.filter((level) => level !== levelLabel);
-
             setSelectedLevels(updatedLevels);
             dispatch(setLevel(updatedLevels));
         }
@@ -41,7 +62,7 @@ function Levels() {
     return (
         <Card className="border-1 mb-4 px-3 py-4">
             <Card.Body>
-                <h5 className="card-title text-end">The Level</h5>
+                <h5 className="card-title text-end">{t('The Level')}</h5>
                 <div className="underline bg-primary mb-4 ms-auto"></div>
                 <ListGroup variant="flush" className="list d-flex flex-row-reverse text-end">
                     <ul className="list-unstyled w-100">

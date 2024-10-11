@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-
 const initialState = {
     level: [],
     rating: null,
@@ -7,7 +6,6 @@ const initialState = {
     language: '',
     search: '',
 };
-
 const filterSlice = createSlice({
     name: 'filters',
     initialState,
@@ -32,7 +30,5 @@ const filterSlice = createSlice({
         },
     },
 });
-
 export const { setLevel, setRating, setSpecialization, setLanguage, setSearch, resetFilters } = filterSlice.actions;
-
 export default filterSlice.reducer;

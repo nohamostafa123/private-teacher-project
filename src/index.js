@@ -6,7 +6,7 @@ import App from './App';
 import { Provider } from 'react-redux';
 import store from './components/teacherComponents/redux/store';
 import $ from 'jquery';
-
+import './i18n';
 // Move window assignments after all import statements
 window.$ = $;
 window.jQuery = $;
