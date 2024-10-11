@@ -27,7 +27,7 @@ const MainHero = () => {
               </li>
             </ul>
             <Button href="/TeacherRegister" className="register-btn">
-            {t('registerTeacher')}
+              {t('registerTeacher')}
             </Button>
           </div>
 
@@ -43,7 +43,7 @@ const MainHero = () => {
 
         <Container fluid className="wow fadeIn">
           <div className="text-center">
-            <h1>{t('looking_for_teacher')}</h1>
+            <h1 className='mb-3'>{t('looking_for_teacher')}</h1>
             <h3>{t('welcome_message')}</h3>
           </div>
 

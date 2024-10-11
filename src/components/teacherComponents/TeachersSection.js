@@ -3,6 +3,7 @@ import './component styles/TeachersSection.css';
 import TeacherCard from './TeacherCard';
 import { useSelector } from 'react-redux';
 import TeacherListCard from './Teacher-list-card';
+import { Spinner } from 'react-bootstrap';
 
 const TeachersSection = ({ currentPage, itemsPerPage }) => {
     const [teachers, setTeachers] = useState([]);
@@ -50,7 +51,14 @@ const TeachersSection = ({ currentPage, itemsPerPage }) => {
     });
 
     if (loading) {
-        return <p>Loading...</p>;
+        return (
+            <div className="d-flex flex-column align-items-center justify-content-center" style={{ height: '100vh' }}>
+                <h2 className="mb-4">Please wait, content is loading...</h2>
+                <Spinner animation="border" role="status" variant="primary" style={{ width: '4rem', height: '4rem' }}>
+                    <span className="sr-only">Loading...</span>
+                </Spinner>
+            </div>
+        );
     }
 
     if (error) {

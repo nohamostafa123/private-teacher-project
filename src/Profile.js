@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./ProfilePage.css";
 import { Camera } from "lucide-react";
+import Spinner from 'react-bootstrap/Spinner';
 
 const Profile = () => {
   const { id } = useParams();
@@ -94,14 +95,15 @@ const Profile = () => {
     }
   };
 
+
+
   if (loading) {
     return (
-      <div>
-        <h1>Loading...</h1>
-        <img
-          src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
-          alt="loading"
-        />
+      <div className="d-flex flex-column align-items-center justify-content-center" style={{ height: '100vh' }}>
+        <h2 className="mb-4">Please wait, content is loading...</h2>
+        <Spinner animation="border" role="status" variant="primary" style={{ width: '4rem', height: '4rem' }}>
+          <span className="sr-only">Loading...</span>
+        </Spinner>
       </div>
     );
   }
@@ -127,11 +129,11 @@ const Profile = () => {
             />
             <label className="camera-icon">
               <Camera className="w-5 h-5" />
-              <input 
-                type="file" 
-                accept="image/*" 
-                onChange={handleImageChange} 
-                style={{ display: "none" }} 
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                style={{ display: "none" }}
               />
             </label>
           </div>
@@ -140,15 +142,14 @@ const Profile = () => {
             {user.last_name || user.lastName}
           </h1>
           <p
-            className={`online-status ${
-              user.onlineStatus === "online" ? "online" : "offline"
-            }`}
+            className={`online-status ${user.onlineStatus === "online" ? "online" : "offline"
+              }`}
           >
             Status: {user.onlineStatus}
           </p>
         </div>
 
-       
+
         {/* Edit Form Section */}
         {isEditing ? (
           <form>

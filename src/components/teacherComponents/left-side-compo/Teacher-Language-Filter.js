@@ -11,9 +11,9 @@ function TeacherLanguageFilter() {
     const dispatch = useDispatch();
     const [selectedLanguage, setSelectedLanguage] = useState("All Languages");
     const languages = [
-        { label: "All Languages", count: 823 },
-        { label: "English", count: 11 },
-        { label: "Arabic", count: 27 },
+        { label: "All Languages" },
+        { label: "English" },
+        { label: "Arabic", },
     ];
     const handleLanguageChange = (event) => {
         const selected = event.target.value;
@@ -43,7 +43,7 @@ function TeacherLanguageFilter() {
                     >
                         {languages.map((language, index) => (
                             <option key={index} value={language.label}>
-                                {language.label} ({language.count})
+                                {language.label}
                             </option>
                         ))}
                     </Form.Select>
