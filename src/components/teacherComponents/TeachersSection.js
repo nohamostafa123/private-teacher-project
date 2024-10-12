@@ -3,6 +3,7 @@ import './component styles/TeachersSection.css';
 import TeacherCard from './TeacherCard';
 import { useSelector } from 'react-redux';
 import TeacherListCard from './Teacher-list-card';
+import { useLocation } from 'react-router-dom';
 import { Spinner } from 'react-bootstrap';
 
 const TeachersSection = ({ currentPage, itemsPerPage }) => {
@@ -11,6 +12,11 @@ const TeachersSection = ({ currentPage, itemsPerPage }) => {
     const [error, setError] = useState(null);
     const viewType = useSelector(state => state.layout.viewType);
     const searchTerm = useSelector((state) => state.filters.search);
+
+
+    const { search } = useLocation();
+    const queryParams = new URLSearchParams(search);
+    const selectedSubject = queryParams.get('subject');
 
     useEffect(() => {
         const fetchTeachers = async () => {
@@ -38,6 +44,7 @@ const TeachersSection = ({ currentPage, itemsPerPage }) => {
     const { level = [], rating, specialization = [], language } = useSelector((state) => state.filters);
     const filteredTeachers = teachers.filter((teacher) => {
         return (
+           ( selectedSubject ? teacher.subject.toLowerCase() === selectedSubject.toLowerCase() : true) && 
             (level.length === 0 || level.includes(teacher.level)) &&
             (rating ? teacher.rating >= rating : true) &&
             (specialization.length > 0 ? specialization.includes(teacher.subject) : true) &&

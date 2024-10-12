@@ -10,6 +10,7 @@ import StudentRegister from './components/registerationComponent/studentRegister
 import TeacherRegister from './components/registerationComponent/teacherRegister';
 import ContactApp from './ContactApp.js';
 import AdminDashboard from './AdminDashBoard.js';
+import ProtectedRoute from './protectedRoute.js';
 import 'leaflet/dist/leaflet.css';
 import $ from 'jquery';
 window.$ = $;
@@ -28,7 +29,7 @@ function App() {
           <Route path="/ContactApp" element={<ContactApp />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/teacher/:id" element={<TeacherDetails />} />
-          <Route path="/AdminDashboard" element={<AdminDashboard />} />
+          <Route path="/AdminDashboard" element={<ProtectedRoute element={AdminDashboard} />} />
 
 
         </Routes>

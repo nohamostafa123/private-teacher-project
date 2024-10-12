@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { FaUserAlt, FaPhoneAlt,FaEye, FaFlag, FaGenderless, FaCalendarAlt, FaBriefcase, FaUsers, FaStar, FaClock } from 'react-icons/fa';
+import { FaUserAlt, FaPhoneAlt,FaEye, FaFlag, FaGenderless, FaCalendarAlt, FaBriefcase } from 'react-icons/fa';
 import './component styles/TeacherDetails.css';
 
 const TeacherDetails = () => {
@@ -168,7 +168,7 @@ const TeacherDetails = () => {
              نبذة عني
          </span>
          <span className={`profile-tab-item ${activeProfileTab === 'options' ? 'active' : ''}`} onClick={() => setActiveProfileTab('options')}>
-             الخيارات
+             الحالة
          </span>
      </div>
 
@@ -180,7 +180,7 @@ const TeacherDetails = () => {
      )}
      {activeProfileTab === 'options' && (
          <div className="profile-content">
-         <p>{teacher.teacher_desc || 'مهندس يوسف امجد مدرس رياضة إبتدائي و اعدادي'}</p>
+         <p>{teacher.onlineStatus || 'مهندس يوسف امجد مدرس رياضة إبتدائي و اعدادي'}</p>
          </div>
      )}
      </div>

@@ -1,22 +1,44 @@
-import React from 'react';
+import React , { useState, useEffect } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import './Category.css';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { setSpecialization } from '../teacherComponents/redux/slices/filterSlice';
 import { useNavigate } from 'react-router-dom';
-
+import axios from 'axios';
 
 const Category = ({ categories }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const [teacherCounts, setTeacherCounts] = useState({});
   // Update: Function now takes a category parameter
   const handelNavigateToTeacherPageToSearchSubject = (category) => {
     navigate('/TeacherApp');
     dispatch(setSpecialization(category.name));  // Use the specific category name
   };
 
-  const { t } = useTranslation();
+  useEffect(() => {
+    // Fetch teacher counts from the backend
+    const fetchTeacherCounts = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/teachers/subject-counts');
+        const counts = response.data;
+        
+        // Transform the data into a key-value pair for easier access
+        const countsMap = counts.reduce((acc, item) => {
+          acc[item.subject] = item.count;
+          return acc;
+        }, {});
+        
+        setTeacherCounts(countsMap);
+      } catch (error) {
+        console.error('Error fetching teacher counts:', error);
+      }
+    };
+
+    fetchTeacherCounts();
+  }, []);
   return (
     <section className="category" id="category">
       <Container fluid>
@@ -42,7 +64,7 @@ const Category = ({ categories }) => {
                   <div className="img_overlay">
                     <div className="text center">
                       <h1>{category.name}</h1>
-                      <h3>{t('teachers')} {category.teacherCount}</h3>
+                      <h3>{t('teachers')} {teacherCounts[category.name] || 0}</h3>
                     </div>
                   </div>
                   <div className="hover">

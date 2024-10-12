@@ -78,6 +78,22 @@
     /* margin-left: 50px; */
 }
 
+
+.custom-confirm {
+    background-image: linear-gradient(
+      150deg,
+      rgb(3, 81, 156) 0%,
+      rgb(49, 117, 182) 51%,
+      rgb(94, 152, 207) 100%
+    );
+    color: white;
+    border: none;
+  }
+  .custom-confirm:hover {
+    background-color: #e9e9e9;
+    color: #03519c;
+  }
+  
 @media (max-width :576px) {
     .contact .info .row .info_block span {
         width: 50px;
