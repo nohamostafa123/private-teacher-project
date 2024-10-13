@@ -1,0 +1,87 @@
+/* Container adjustments */
+.dash-container {
+  width: 100% !important;
+
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Row styling */
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+/* Sidebar styling */
+.sidebar {
+  background-color: #f8f9fa;
+  border-right: 2px solid #ddd;
+  height: 100vh; /* Make the sidebar full height */
+  padding: 20px;
+  position: sticky;
+  top: 0;
+}
+
+.sidebar h2 {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  font-size: 1.1rem;
+  color: #007bff;
+}
+
+.sidebar ul li a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* Content area styling */
+.col-md-8 {
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Table styling for dashboard */
+.table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.table th,
+.table td {
+  padding: 15px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f1f1f1;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+/* Buttons for actions */
+button {
+  font-size: 0.9rem;
+  padding: 8px 15px;
+  margin-right: 5px;
+}
+
+button:hover {
+  cursor: pointer;
+}

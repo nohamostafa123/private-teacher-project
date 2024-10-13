@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Form, Table } from 'react-bootstrap';
-import './AdminDashboard.css'; 
+import './AdminDashboard.css';
 import { useTranslation } from 'react-i18next';
 
 const AdminDashboard = () => {
@@ -23,7 +23,7 @@ const AdminDashboard = () => {
     const savedCategories = localStorage.getItem('categories');
     return savedCategories ? JSON.parse(savedCategories) : initialCategories;
   });
-  
+
   const [newCategory, setNewCategory] = useState({ name: '', teacherCount: 0, imgSrc: '' });
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -36,7 +36,7 @@ const AdminDashboard = () => {
     if (newCategory.name && newCategory.teacherCount && newCategory.imgSrc) {
       setCategories([...categories, { ...newCategory, teacherCount: Number(newCategory.teacherCount), delay: '0.15s' }]);
       setNewCategory({ name: '', teacherCount: 0, imgSrc: '' });
-      setImagePreview(null); 
+      setImagePreview(null);
     }
   };
 

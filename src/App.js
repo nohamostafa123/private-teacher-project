@@ -9,8 +9,12 @@ import Profile from './Profile.js';
 import StudentRegister from './components/registerationComponent/studentRegister'
 import TeacherRegister from './components/registerationComponent/teacherRegister';
 import ContactApp from './ContactApp.js';
-import AdminDashboard from './AdminDashBoard.js';
-import ProtectedRoute from './protectedRoute.js';
+import AdminDashboard from './AdminDashBoard';
+import Subjects from './components/admindashComponent/subjects.jsx';  // Import each component
+import Teachers from './components/admindashComponent/Teachers.js';
+import Students from './components/admindashComponent/Students.js';
+import Contact from './components/admindashComponent/Contacts.js';
+// import ProtectedRoute from './protectedRoute.js';
 import 'leaflet/dist/leaflet.css';
 import $ from 'jquery';
 window.$ = $;
@@ -29,9 +33,12 @@ function App() {
           <Route path="/ContactApp" element={<ContactApp />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/teacher/:id" element={<TeacherDetails />} />
-          <Route path="/AdminDashboard" element={<ProtectedRoute element={AdminDashboard} />} />
-
-
+          <Route path="/admin" element={<AdminDashboard />}>
+            <Route path="subjects" element={<Subjects />} />
+            <Route path="teachers" element={<Teachers />} />
+            <Route path="students" element={<Students />} />
+            <Route path="contact" element={<Contact />} />
+          </Route>
         </Routes>
       </Router>
 
