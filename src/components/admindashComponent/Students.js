@@ -118,7 +118,7 @@ const StudentsDashboard = () => {
                                     <td>{student.firstName}</td>
                                     <td>{student.lastName}</td>
                                     <td>{student.phone}</td>
-                                    <td>{student._id ? student._id.email : 'N/A'}</td>
+                                    <td>{student.userId?.email || 'N/A'}</td>
 
                                     <td>
                                         {/* <Button

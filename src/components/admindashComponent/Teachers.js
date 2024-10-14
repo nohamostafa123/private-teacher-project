@@ -161,7 +161,7 @@ const TeachersDashboard = () => {
                                     <td>{teacher.first_name}</td>
                                     <td>{teacher.last_name}</td>
                                     <td>{teacher.phone}</td>
-                                    <td>{teacher.Teacher_Id ? teacher.Teacher_Id.email : 'N/A'}</td>
+                                    <td>{teacher.userId?.email || 'N/A'}</td>
                                     <td>{teacher.subject}</td>
                                     <td>
                                         {/* <Button
