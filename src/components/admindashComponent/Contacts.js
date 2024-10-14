@@ -28,7 +28,7 @@ const ContactsDashboard = () => {
     const handleDeleteContact = async (contactId) => {
         try {
             await axios.delete(`http://localhost:5000/api/contact/delete/${contactId}`);
-            setContacts(contacts.filter((contact) => contact.Contact_Id !== contactId));
+            setContacts(contacts.filter((contact) => contact._id !== contactId));
         } catch (error) {
             console.error('Error deleting contact:', error);
         }
@@ -58,7 +58,7 @@ const ContactsDashboard = () => {
                                 </tr>
                             ) : (
                                 contacts.map((contact, index) => (
-                                    <tr key={contact.Contact_Id}>
+                                    <tr key={contact._id}>
                                         <td>{index + 1}</td>
                                         <td>{contact.name}</td>
                                         <td>{contact.email}</td>
@@ -66,7 +66,7 @@ const ContactsDashboard = () => {
                                         <td>
                                             <Button
                                                 variant="danger"
-                                                onClick={() => handleDeleteContact(contact.Contact_Id)}
+                                                onClick={() => handleDeleteContact(contact._id)}
                                             >
                                                 {t('Delete')}
                                             </Button>

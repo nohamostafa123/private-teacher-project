@@ -12,11 +12,7 @@ const StudentsDashboard = () => {
         lastName: '',
         phone: '',
         email: '',
-        country: '',
-        date_of_birth: '',
-        gender: '',
-        academic_level: '',
-        language: '',
+        
     });
     const [editingStudentId, setEditingStudentId] = useState(null); // To track if updating a student
     const [loading, setLoading] = useState(false);
@@ -44,7 +40,7 @@ const StudentsDashboard = () => {
                 if (response.status === 200) {
                     setStudents(
                         students.map((student) =>
-                            student.userId === editingStudentId ? response.data : student
+                            student._id === editingStudentId ? response.data : student
                         )
                     );
                 }
@@ -62,11 +58,7 @@ const StudentsDashboard = () => {
                 lastName: '',
                 phone: '',
                 email: '',
-                country: '',
-                date_of_birth: '',
-                gender: '',
-                academic_level: '',
-                language: '',
+                
             });
             setEditingStudentId(null);
         } catch (error) {
@@ -84,7 +76,7 @@ const StudentsDashboard = () => {
     const handleDeleteStudent = async (studentId) => {
         try {
             await axios.delete(`http://localhost:5000/api/students/delete/${studentId}`);
-            setStudents(students.filter((student) => student.userId !== studentId));
+            setStudents(students.filter((student) => student._id !== studentId));
         } catch (error) {
             console.error('Error deleting student:', error);
         }
@@ -96,13 +88,9 @@ const StudentsDashboard = () => {
             lastName: student.lastName,
             phone: student.phone,
             email: student.email,
-            country: student.country,
-            date_of_birth: student.date_of_birth,
-            gender: student.gender,
-            academic_level: student.academic_level,
-            language: student.language,
+            
         });
-        setEditingStudentId(student.userId);
+        setEditingStudentId(student.student._id);
     };
 
     return (
@@ -125,24 +113,24 @@ const StudentsDashboard = () => {
                         </thead>
                         <tbody>
                             {students.map((student, index) => (
-                                <tr key={student.userId}>
+                                <tr key={student._id}>
                                     <td>{index + 1}</td>
                                     <td>{student.firstName}</td>
                                     <td>{student.lastName}</td>
                                     <td>{student.phone}</td>
-                                    <td>{student.userId ? student.userId.email : 'N/A'}</td>
+                                    <td>{student._id ? student._id.email : 'N/A'}</td>
 
                                     <td>
-                                        <Button
+                                        {/* <Button
                                             variant="warning"
                                             onClick={() => handleEditStudent(student)}
                                             className="me-2"
                                         >
                                             {t('Edit')}
-                                        </Button>
+                                        </Button> */}
                                         <Button
                                             variant="danger"
-                                            onClick={() => handleDeleteStudent(student.userId)}
+                                            onClick={() => handleDeleteStudent(student._id)}
                                         >
                                             {t('Delete')}
                                         </Button>
@@ -155,7 +143,7 @@ const StudentsDashboard = () => {
             </Row>
 
             {/* Register or Edit Student */}
-            <Row className="mt-4">
+            {/* <Row className="mt-4">
                 <Col md={6} className="offset-md-3">
                     <h3>{editingStudentId ? t('Edit Student') : t('Register New Student')}</h3>
                     <Form onSubmit={handleRegisterStudent}>
@@ -209,7 +197,7 @@ const StudentsDashboard = () => {
                         </Button>
                     </Form>
                 </Col>
-            </Row>
+            </Row> */}
         </Container>
     );
 };

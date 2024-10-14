@@ -31,33 +31,42 @@ const TeachersDashboard = () => {
         }
     };
 
+  
     const handleRegisterTeacher = async (e) => {
         e.preventDefault();
         try {
             setLoading(true);
+            let response;
+    
             if (editingTeacherId) {
-                // Update Teacher
-                const response = await axios.put(`http://localhost:5000/api/teachers/update/${editingTeacherId}`, newTeacher);
-                console.log('Update Response:', response.data); // Log response for debugging
-
+                // Update existing teacher
+                response = await axios.put(
+                    `http://localhost:5000/api/teachers/update/${editingTeacherId}`,
+                    newTeacher
+                );
                 if (response.status === 200) {
-                    setTeachers(
-                        teachers.map((teacher) =>
-                            teacher.userId === editingTeacherId ? response.data : teacher // Update to use userId
+                    // Update the state with the new teacher data
+                    setTeachers((prevTeachers) =>
+                        prevTeachers.map((teacher) =>
+                            teacher.Teacher_Id === editingTeacherId
+                                ? response.data
+                                : teacher
                         )
                     );
                 }
             } else {
-                // Add new teacher
-                const response = await axios.post('http://localhost:5000/api/teachers/register', newTeacher);
-                console.log('Register Response:', response.data); // Log response for debugging
-
+                // Register new teacher
+                response = await axios.post(
+                    'http://localhost:5000/api/teachers/register',
+                    newTeacher
+                );
                 if (response.status === 201) {
+                    // Add the new teacher to the list
                     setTeachers([...teachers, response.data]);
                 }
             }
-
-            // Reset form and state after adding/updating
+    
+            // Reset form and state after operation
             setNewTeacher({
                 first_name: '',
                 last_name: '',
@@ -69,37 +78,61 @@ const TeachersDashboard = () => {
             setEditingTeacherId(null);
         } catch (error) {
             console.error('Error registering/updating teacher:', error);
+            // Provide user feedback for error
+            alert('An error occurred while saving the teacher. Please try again.');
         } finally {
             setLoading(false);
         }
     };
+    
+    
+    
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setNewTeacher({ ...newTeacher, [name]: value });
     };
 
+    // const handleDeleteTeacher = async (teacherId) => {
+        
+    //     try {
+    //         const response = await axios.delete(`http://localhost:5000/api/teachers/delete/${teacherId}`);
+    //         console.log('Delete Response:', response.data); // Log response for debugging
+
+    //         setTeachers((prevTeachers) => prevTeachers.filter((teacher) => teacher.userId !== teacherId));
+    //         // Filter by the correct ID
+    //     } catch (error) {
+    //         console.error('Error deleting teacher:', error);
+    //     }
+    // };
     const handleDeleteTeacher = async (teacherId) => {
         try {
-            const response = await axios.delete(`http://localhost:5000/api/teachers/delete/${teacherId}`);
-            console.log('Delete Response:', response.data); // Log response for debugging
-
-            setTeachers(teachers.filter((teacher) => teacher.userId !== teacherId)); // Filter by the correct ID
+            const response = await axios.delete(
+                `http://localhost:5000/api/teachers/delete/${teacherId}`
+            );
+            console.log('Delete Response:', response.data);
+    
+            // تحديث الحالة بعد الحذف
+            setTeachers((prevTeachers) =>
+                prevTeachers.filter((teacher) => teacher.Teacher_Id !== teacherId)
+            );
         } catch (error) {
             console.error('Error deleting teacher:', error);
         }
     };
+    
 
     const handleEditTeacher = (teacher) => {
         setNewTeacher({
             first_name: teacher.first_name,
             last_name: teacher.last_name,
             phone: teacher.phone,
-            email: teacher.userId ? teacher.userId.email : '',
+            email: teacher.email, 
             password: '', // Leave this out or handle password reset differently
             subject: teacher.subject,
         });
-        setEditingTeacherId(teacher.userId); // Set the editing ID to the correct userId
+        setEditingTeacherId(teacher.userId || teacher.Teacher_Id);
+        // Set the editing ID to the correct   userId
     };
 
     return (
@@ -123,24 +156,24 @@ const TeachersDashboard = () => {
                         </thead>
                         <tbody>
                             {teachers.map((teacher, index) => (
-                                <tr key={teacher.userId}>
+                                <tr key={teacher.Teacher_Id }>
                                     <td>{index + 1}</td>
                                     <td>{teacher.first_name}</td>
                                     <td>{teacher.last_name}</td>
                                     <td>{teacher.phone}</td>
-                                    <td>{teacher.userId ? teacher.userId.email : 'N/A'}</td>
+                                    <td>{teacher.Teacher_Id ? teacher.Teacher_Id.email : 'N/A'}</td>
                                     <td>{teacher.subject}</td>
                                     <td>
-                                        <Button
+                                        {/* <Button
                                             variant="warning"
                                             onClick={() => handleEditTeacher(teacher)}
                                             className="me-2"
                                         >
                                             {t('Edit')}
-                                        </Button>
+                                        </Button> */}
                                         <Button
                                             variant="danger"
-                                            onClick={() => handleDeleteTeacher(teacher.userId)} // Use the correct userId for deletion
+                                            onClick={() => handleDeleteTeacher(teacher.Teacher_Id)}  // Use the correct   userId for deletion
                                         >
                                             {t('Delete')}
                                         </Button>
@@ -153,7 +186,7 @@ const TeachersDashboard = () => {
             </Row>
 
             {/* Register or Edit Teacher */}
-            <Row className="mt-4">
+            {/* <Row className="mt-4">
                 <Col md={6} className="offset-md-3">
                     <h3>{editingTeacherId ? t('Edit Teacher') : t('Register New Teacher')}</h3>
                     <Form onSubmit={handleRegisterTeacher}>
@@ -224,7 +257,7 @@ const TeachersDashboard = () => {
                         </Button>
                     </Form>
                 </Col>
-            </Row>
+            </Row> */}
         </Container>
     );
 };
