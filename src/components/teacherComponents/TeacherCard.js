@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FaUserAlt, FaStar, FaRegStar, FaGraduationCap, FaHeart, FaRegHeart, FaFlag, FaHome, FaBriefcase, FaPhoneAlt, FaCamera } from 'react-icons/fa';
 import { useNavigate, Link } from 'react-router-dom';
-import { Modal, Button } from 'react-bootstrap'; // Import Modal and Button from react-bootstrap
+import { Modal, Button } from 'react-bootstrap';
+
 import './component styles/TeacherCard.css';
 
 const countryCodes = {
@@ -27,8 +28,8 @@ const TeacherCard = ({ teacher }) => {
     const [countryCode, setCountryCode] = useState(countryCodes[teacher.country] || '+20');
     const [phoneNumber, setPhoneNumber] = useState(teacher.phone || '');
     const [message, setMessage] = useState('');
-    const [showModal, setShowModal] = useState(false); // State for modal visibility
-    const charLimit = 10;
+    const [showModal, setShowModal] = useState(false);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -110,15 +111,15 @@ const TeacherCard = ({ teacher }) => {
         handleWhatsApp('');
     };
 
-    // Function to handle the modal open
     const handleContactClick = () => {
         setShowModal(true);
     };
 
-    // Function to close the modal
     const handleCloseModal = () => {
         setShowModal(false);
     };
+
+
 
     return (
         <div className="card shadow-sm teacher-card d-flex justify-content-center align-items-center flex-column">
@@ -145,7 +146,7 @@ const TeacherCard = ({ teacher }) => {
                 <div className="col-md-12">
                     <div className="card-body">
                         <h5 className="teacher-title">
-                            {`${teacher.teacher_desc.substring(0, charLimit)}`}
+                            {`${teacher.teacher_desc.substring(0, 10)}`} {/* Short description */}
                             <span className='text-muted'>...</span>
                             <Link
                                 to={`/teacher/${teacher._id}`}
@@ -179,6 +180,8 @@ const TeacherCard = ({ teacher }) => {
                             <p className="mb-1"><FaHome className="me-2" /> Status: {teacher.onlineStatus}</p>
                         </div>
 
+                        
+
                         <div className="mb-3">
                             <button className="contact-button" onClick={handleContactClick} style={{ cursor: 'pointer' }}>Contact</button>
                         </div>
@@ -197,15 +200,18 @@ const TeacherCard = ({ teacher }) => {
                         placeholder="Write a message..."
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
-                        className="form-control mb-2"
+                        className="form-control"
                     />
                 </Modal.Body>
                 <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseModal}>
+                        Close
+                    </Button>
                     <Button variant="primary" onClick={handleSendMessage}>
                         Send Message
                     </Button>
-                    <Button variant="primary" onClick={handleContactWithoutMessage}>
-                        Just Contact
+                    <Button variant="outline-primary" onClick={handleContactWithoutMessage}>
+                        Contact Without Message
                     </Button>
                 </Modal.Footer>
             </Modal>
