@@ -4,18 +4,29 @@ import './MainHero.css'; // Import your custom styles
 import './MyNav.css';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setSearch } from '../teacherComponents/redux/slices/filterSlice';
 
 const MainHero = () => {
   const { t } = useTranslation(); // Use the translation hook
   const navigate = useNavigate(); 
+  const dispatch = useDispatch();
   const [selectedSubject, setSelectedSubject] = useState(''); // State to store selected subject
+  const [searchTerm, setSearchTerm] = useState(''); 
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // Navigate to teacher page with the selected subject as a query parameter
     if (selectedSubject) {
-      navigate(`/TeacherApp?subject=${selectedSubject}`);
+      navigate(`/TeacherApp?subject=${selectedSubject}&search=${searchTerm}`);
     }
+  };
+
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    dispatch(setSearch(value)); // Dispatch the search term to Redux
   };
 
   return (
@@ -66,6 +77,8 @@ const MainHero = () => {
                 name="keywords"
                 placeholder={t('search_placeholder')}
                 className="form-control"
+                value={searchTerm}
+                onChange={handleSearchChange} 
               />
               <img src="./images/search.png" className="form-icon" alt="Search Icon" />
             </Col>
