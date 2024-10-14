@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Button, Table } from 'react-bootstrap';
-import axios from 'axios';
-import './AdminDashboard.css';
+import { Container, Row, Col, Button, Form, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { setTotalContacts } from '../teacherComponents/redux/slices/dash-board-slice';
+import axios from 'axios';
 
 const ContactsDashboard = () => {
     const { t } = useTranslation();
     const [contacts, setContacts] = useState([]);
+    const [newContact, setNewContact] = useState({ name: '', email: '', message: '' });
     const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         fetchContacts();
@@ -18,10 +21,24 @@ const ContactsDashboard = () => {
             setLoading(true);
             const response = await axios.get('http://localhost:5000/api/contact/list');
             setContacts(response.data);
+            dispatch(setTotalContacts(response.data.length));
         } catch (error) {
             console.error('Error fetching contacts:', error);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleAddContact = async (e) => {
+        e.preventDefault();
+        if (newContact.name && newContact.email && newContact.message) {
+            try {
+                const response = await axios.post('http://localhost:5000/api/contact/add', newContact);
+                setContacts([...contacts, response.data]);
+                setNewContact({ name: '', email: '', message: '' });
+            } catch (error) {
+                console.error('Error adding contact:', error);
+            }
         }
     };
 
@@ -35,7 +52,7 @@ const ContactsDashboard = () => {
     };
 
     return (
-        <Container fluid className="admin-dashboard">
+        <Container fluid className="contacts-dashboard">
             <h1 className="text-center my-4">{t('Contacts Dashboard')}</h1>
 
             {/* Contacts List */}
@@ -54,7 +71,7 @@ const ContactsDashboard = () => {
                         <tbody>
                             {loading ? (
                                 <tr>
-                                    <td colSpan="6" className="text-center">{t('Loading...')}</td>
+                                    <td colSpan="5" className="text-center">{t('Loading...')}</td>
                                 </tr>
                             ) : (
                                 contacts.map((contact, index) => (
@@ -65,6 +82,7 @@ const ContactsDashboard = () => {
                                         <td>{contact.message}</td>
                                         <td>
                                             <Button
+                                                className="button-delete"
                                                 variant="danger"
                                                 onClick={() => handleDeleteContact(contact._id)}
                                             >
@@ -78,6 +96,8 @@ const ContactsDashboard = () => {
                     </Table>
                 </Col>
             </Row>
+
+
         </Container>
     );
 };

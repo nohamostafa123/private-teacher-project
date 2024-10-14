@@ -2,20 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Form, Table } from 'react-bootstrap';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
-import './AdminDashboard.css';
+import './AdminDashboard.css'; // Ensure your styles are imported
+import { useDispatch } from 'react-redux';
+import { setTotalStudents } from '../teacherComponents/redux/slices/dash-board-slice';
 
 const StudentsDashboard = () => {
     const { t } = useTranslation();
     const [students, setStudents] = useState([]);
+    const [searchTerm, setSearchTerm] = useState(''); // State for search input
     const [newStudent, setNewStudent] = useState({
         firstName: '',
         lastName: '',
         phone: '',
         email: '',
-        
     });
     const [editingStudentId, setEditingStudentId] = useState(null); // To track if updating a student
     const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         fetchStudents();
@@ -25,6 +28,7 @@ const StudentsDashboard = () => {
         try {
             const response = await axios.get('http://localhost:5000/api/students/list');
             setStudents(response.data);
+            dispatch(setTotalStudents(response.data.length));
         } catch (error) {
             console.error('Error fetching students:', error);
         }
@@ -58,7 +62,6 @@ const StudentsDashboard = () => {
                 lastName: '',
                 phone: '',
                 email: '',
-                
             });
             setEditingStudentId(null);
         } catch (error) {
@@ -88,116 +91,75 @@ const StudentsDashboard = () => {
             lastName: student.lastName,
             phone: student.phone,
             email: student.email,
-            
         });
-        setEditingStudentId(student.student._id);
+        setEditingStudentId(student._id);
     };
+
+    // Filter students based on the search term
+    const filteredStudents = students.filter(student =>
+        student.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        student.lastName.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <Container fluid className="admin-dashboard">
             <h1 className="text-center my-4">{t('Students Dashboard')}</h1>
 
+            {/* Search Input */}
+            <Form.Group className="mb-3">
+
+                <Form.Control
+                    type="text"
+                    placeholder={t('Search by name...')}
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+            </Form.Group>
+
+
             {/* Students List */}
             <Row>
                 <Col>
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>{t('First Name')}</th>
-                                <th>{t('Last Name')}</th>
-                                <th>{t('Phone')}</th>
-                                <th>{t('Email')}</th>
-                                <th>{t('Actions')}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {students.map((student, index) => (
-                                <tr key={student._id}>
-                                    <td>{index + 1}</td>
-                                    <td>{student.firstName}</td>
-                                    <td>{student.lastName}</td>
-                                    <td>{student.phone}</td>
-                                    <td>{student.userId?.email || 'N/A'}</td>
-
-                                    <td>
-                                        {/* <Button
-                                            variant="warning"
-                                            onClick={() => handleEditStudent(student)}
-                                            className="me-2"
-                                        >
-                                            {t('Edit')}
-                                        </Button> */}
-                                        <Button
-                                            variant="danger"
-                                            onClick={() => handleDeleteStudent(student._id)}
-                                        >
-                                            {t('Delete')}
-                                        </Button>
-                                    </td>
+                    <div style={{ maxHeight: '450px', overflowY: 'auto' }}>
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>{t('First Name')}</th>
+                                    <th>{t('Last Name')}</th>
+                                    <th>{t('Phone')}</th>
+                                    <th>{t('Email')}</th>
+                                    <th>{t('Actions')}</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </Table>
+                            </thead>
+                            <tbody>
+                                {filteredStudents.map((student, index) => (
+                                    <tr key={student._id}>
+                                        <td>{index + 1}</td>
+                                        <td>{student.firstName}</td>
+                                        <td>{student.lastName}</td>
+                                        <td>{student.phone}</td>
+                                        <td>{student.email}</td>
+                                        <td>
+                                            <Button
+                                                className="button-delete"
+                                                variant="danger"
+                                                onClick={() => handleDeleteStudent(student._id)}
+                                            >
+                                                {t('Delete')}
+                                            </Button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                    </div>
                 </Col>
             </Row>
 
             {/* Register or Edit Student */}
-            {/* <Row className="mt-4">
-                <Col md={6} className="offset-md-3">
-                    <h3>{editingStudentId ? t('Edit Student') : t('Register New Student')}</h3>
-                    <Form onSubmit={handleRegisterStudent}>
-                        <Form.Group>
-                            <Form.Label>{t('First Name')}</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="firstName" // Update to match backend
-                                value={newStudent.firstName}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>{t('Last Name')}</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="lastName" // Update to match backend
-                                value={newStudent.lastName}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>{t('Phone')}</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="phone"
-                                value={newStudent.phone}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>{t('Email')}</Form.Label>
-                            <Form.Control
-                                type="email"
-                                name="email"
-                                value={newStudent.email}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </Form.Group>
-
-
-
-                        <Button type="submit" className="mt-3" disabled={loading}>
-                            {loading
-                                ? t(editingStudentId ? 'Updating...' : 'Registering...')
-                                : t(editingStudentId ? 'Update Student' : 'Register Student')}
-                        </Button>
-                    </Form>
-                </Col>
-            </Row> */}
+            {/* Form for adding/updating students can be added here */}
+            {/* Uncomment and implement similar to the previous example if needed */}
         </Container>
     );
 };
