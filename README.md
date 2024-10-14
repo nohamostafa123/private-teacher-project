@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+<h1 style="font-weight: 700;">🎓 Private Teacher Project</h1>
+Private Teacher is a full-stack web application designed to help students easily find private teachers for one-on-one lessons and to allow teachers to showcase their expertise. Each student and teacher has a profile account, allowing students to search for the right teacher while teachers can manage their profiles and bookings.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 style="font-weight: 700;">📖 Project Overview</h1>
+The Private Teacher platform connects students with private teachers. It allows students to easily search for teachers based on their preferences and helps teachers to showcase their qualifications and fields of expertise. Every user has a personal profile account, enhancing the user experience and making it easy to manage bookings and personal information.
 
-## Available Scripts
+<h1 style="font-weight: 700;">✨ Features</h1>
+<p><strong>-Profile Management:</strong> Both students and teachers have personal profiles, enabling easy management of their information and activities.</p>
+<p><strong>-Search Functionality:</strong> Students can search for private teachers based on,name, subjects, rating, and experience.</p>
+<p><strong>-Teacher Showcase:</strong> Teachers can create profiles to highlight their fields, years of experience, and teaching specialties.</p>
+<p><strong>-Contact addition:</strong> Each Teacher and student can contact</p>
+<p><strong>-Multi-Language Support:</strong> The platform supports both English and Arabic for accessibility.</p>
+<p><strong>-Mobile Responsive:</strong> Optimized for mobile and desktop devices.</p>
 
-In the project directory, you can run:
+<h1 style="font-weight: 700;">💻 Tech Stack</h3>
+<h3>-Frontend</h3>
+<p><strong>React:</strong> User interface development.</p>
+<p><strong>React Router DOM:</strong> Dynamic, client-side routing for navigation.</p>
+<p><strong>React Leaflet:</strong> Interactive maps for teacher locations.</p>
+<p><strong>React Bootstrap:</strong> For responsive and styled UI components.</p>
+<p><strong>jQuery:</strong> Simplified DOM manipulation.</p>
+<p><strong>Axios:</strong> For making HTTP requests to the backend API.</p>
+<p><strong>FontAwesome:</strong> Icons used throughout the application.</p>
+<p><strong>Web Vitals:</strong> Measure and report essential user experience metrics like performance.</p>
 
-### `npm start`
+<h3>-Backend</h3>
+<p><strong>Node.js:</strong> JavaScript runtime.</p>
+<p><strong>Express:</strong> Web framework for API and routing.</p>
+<p><strong>MongoDB:</strong> NoSQL database for storing users, teachers, and bookings.</p>
+<p><strong>Mongoose:</strong> Object Data Modeling (ODM) for MongoDB.</p>
+<p><strong>JWT:</strong> Secure authentication using JSON Web Tokens.</p>
+<p><strong>Multer:</strong> For handling profile picture uploads.</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<h1 style="font-weight: 700;">📢 User Authentication</h1>
+The platform uses JWT for secure login and registration, ensuring the privacy of user information. Bcryptjs is used to securely hash passwords.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<h1 style="font-weight: 700;">⚙️ Installation</h1>
+<h3>To set up the project locally:</h3>
+<pre>
+  1-Clone the repository:
+  git clone https://github.com/nohamostafa123/private-teacher-project.git</pre>
+<pre>
+  2-Navigate to the project directory:
+  cd private-teacher-project
+</pre>
+<pre>
+ 3-Install dependencies for the frontend :
+ npm install
+</pre>
+<pre>
+  4- run your project:
+  npm start
+</pre>
+<h3>And to install our backend server</h3>
+<pre>
+  1-Clone the repository:
+  git clone https://github.com/RahmaYahiaa/private-teacher-backend.git
+</pre>
+<pre>
+  2-Navigate to the project directory:
+  cd private-teacher-backend
+</pre>
+<pre>
+ 3-Install dependencies for both the backend:
+ npm install
+</pre>
+<pre>
+  4- run your project:
+  npm run dev
+</pre>
