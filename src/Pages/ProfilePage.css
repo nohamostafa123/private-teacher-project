@@ -11,7 +11,7 @@ body {
 
 /* Profile page background */
 .bg-profile {
-  background-image: url("../public/images/sign_bg.png");
+  background-image: url("../../public/images/sign_bg.png");
   background-size: cover;
   background-position: top left;
   background-repeat: no-repeat;

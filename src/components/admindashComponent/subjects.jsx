@@ -8,27 +8,41 @@ import axios from 'axios';
 
 const AdminDashboard = () => {
   const { t } = useTranslation();
-  const initialCategories = [
-    { name: 'Arabic', imgSrc: './images/عربي.jpeg', delay: '0.15s' },
-    { name: 'Biology', imgSrc: './images/احياء.jpeg', delay: '0.35s' },
-    { name: 'Chemistry', imgSrc: './images/كيمياء.jpeg', delay: '0.15s' },
-    { name: 'English', imgSrc: './images/انجليزي.png', delay: '0.75s' },
-    { name: 'French', imgSrc: './images/فرنساوى.jpeg', delay: '0.15s' },
-    { name: 'Geography', imgSrc: './images/جغرافيا.jpeg', delay: '0.15s' },
-    { name: 'History', imgSrc: './images/تاريخ.jpeg', delay: '0.15s' },
-    { name: 'Math', imgSrc: './images/رياضة.jpeg', delay: '0.15s' },
-    { name: 'Philosophy', imgSrc: './images/فلسفه.jpeg', delay: '0.15s' },
-    { name: 'Physics', imgSrc: './images/فزيا.jpeg', delay: '0.15s' },
-    { name: 'Psychology', imgSrc: './images/علم النفس.jpeg', delay: '0.15s' },
-    { name: 'Science', imgSrc: './images/علوم.jpeg', delay: '0.15s' },
-  ];
 
-  const [categories, setCategories] = useState(initialCategories);
+  // Load from localStorage or use initial categories if localStorage is empty
+  const loadInitialCategories = () => {
+    const storedCategories = localStorage.getItem('categories');
+    if (storedCategories) {
+      return JSON.parse(storedCategories); // Load categories from localStorage
+    } else {
+      return [
+        { name: 'Arabic', imgSrc: './images/عربي.jpeg', delay: '0.15s' },
+        { name: 'Biology', imgSrc: './images/احياء.jpeg', delay: '0.35s' },
+        { name: 'Chemistry', imgSrc: './images/كيمياء.jpeg', delay: '0.15s' },
+        { name: 'English', imgSrc: './images/انجليزي.png', delay: '0.75s' },
+        { name: 'French', imgSrc: './images/فرنساوى.jpeg', delay: '0.15s' },
+        { name: 'Geography', imgSrc: './images/جغرافيا.jpeg', delay: '0.15s' },
+        { name: 'History', imgSrc: './images/تاريخ.jpeg', delay: '0.15s' },
+        { name: 'Math', imgSrc: './images/رياضة.jpeg', delay: '0.15s' },
+        { name: 'Philosophy', imgSrc: './images/فلسفه.jpeg', delay: '0.15s' },
+        { name: 'Physics', imgSrc: './images/فزيا.jpeg', delay: '0.15s' },
+        { name: 'Psychology', imgSrc: './images/علم النفس.jpeg', delay: '0.15s' },
+        { name: 'Science', imgSrc: './images/علوم.jpeg', delay: '0.15s' },
+      ]; // Fallback to initial categories
+    }
+  };
+
+  const [categories, setCategories] = useState(loadInitialCategories());
   const [newCategory, setNewCategory] = useState({ name: '', imgSrc: '' });
   const [imagePreview, setImagePreview] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
 
   const dispatch = useDispatch();
+
+  // Save categories to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('categories', JSON.stringify(categories));
+  }, [categories]);
 
   useEffect(() => {
     const fetchTeacherCounts = async () => {
@@ -37,12 +51,12 @@ const AdminDashboard = () => {
         const counts = response.data;
 
         // Map counts to categories
-        const updatedCategories = initialCategories.map(category => {
-          const foundCategory = counts.find(count => count.subject === category.name);
+        const updatedCategories = categories.map((category) => {
+          const foundCategory = counts.find((count) => count.subject === category.name);
           return {
             ...category,
-            teacherCount: foundCategory ? foundCategory.count : 0 // Add teacherCount dynamically
-          };
+            teacherCount: foundCategory ? foundCategory.count : 0, // Add teacherCount dynamically
+             };
         });
 
         setCategories(updatedCategories);
@@ -84,7 +98,7 @@ const AdminDashboard = () => {
     dispatch(setTotalSubjects(categories.length));
   }, [categories.length, dispatch]);
 
-  const filteredCategories = categories.filter(category =>
+  const filteredCategories = categories.filter((category) =>
     category.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -115,7 +129,7 @@ const AdminDashboard = () => {
                 </tr>
               </thead>
 
-              <tbody >
+              <tbody>
                 {filteredCategories.map((category, index) => (
                   <tr key={index}>
                     <td>{index + 1}</td>
@@ -125,7 +139,13 @@ const AdminDashboard = () => {
                       <img src={category.imgSrc} alt={category.name} style={{ width: '50px', height: '50px' }} />
                     </td>
                     <td>
-                      <Button className="button-delete" variant="danger" onClick={() => handleDeleteCategory(index)}>{t('Delete')}</Button>
+                      <Button
+                        className="button-delete"
+                        variant="danger"
+                        onClick={() => handleDeleteCategory(index)}
+                      >
+                        {t('Delete')}
+                      </Button>
                     </td>
                   </tr>
                 ))}
@@ -160,7 +180,9 @@ const AdminDashboard = () => {
               </div>
             )}
 
-            <Button type="submit" className="mt-3">{t('Add Subject')}</Button>
+            <Button type="submit" className="mt-3">
+              {t('Add Subject')}
+            </Button>
           </Form>
         </Col>
       </Row>
