@@ -91,7 +91,7 @@ const MyNav = ({ isAuthenticated }) => {
       const passwordMatch = await bcrypt.compare(password, hashedPassword);
   
       if (passwordMatch) {
-        navigate('/AdminDashboard');
+        navigate('/admin');
       } else {
         Swal.fire({
           icon: 'error',

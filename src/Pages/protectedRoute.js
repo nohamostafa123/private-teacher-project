@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
+import bcrypt from 'bcryptjs';
 
 const ProtectedRoute = ({ element }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const correctPassword = 'admin123'; // Set your desired password here
+  
+  // Store a hashed version of your password (using bcrypt)
+  const hashedPassword = '$2a$10$ZJPqbnE1v8E5UnBG3SyxyOkNPqGlhJPyjLDswDZCBnAE9gogBFwBO'; // Pre-hashed 'admin123'
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -26,8 +29,10 @@ const ProtectedRoute = ({ element }) => {
         confirmButton: 'custom-confirm-button',
         cancelButton: 'custom-cancel-button',
       },
-      preConfirm: (password) => {
-        if (password === correctPassword) {
+      preConfirm: async (password) => {
+        // Compare the entered password with the hashed password
+        const isPasswordCorrect = await bcrypt.compare(password, hashedPassword);
+        if (isPasswordCorrect) {
           setIsAuthenticated(true);
         } else {
           Swal.fire({

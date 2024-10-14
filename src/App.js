@@ -16,6 +16,7 @@ import Students from './components/admindashComponent/Students.js';
 import Contact from './components/admindashComponent/Contacts.js';
 import TotalDashboard from './components/admindashComponent/TotalDashboard.js';
 import ProtectedRoute from './Pages/protectedRoute.js'; 
+import FavoritesPage from './components/teacherComponents/FavoritesPage.jsx';
 
 import 'leaflet/dist/leaflet.css';
 import $ from 'jquery';
@@ -35,7 +36,7 @@ function App() {
         <Route path="/ContactApp" element={<ContactApp />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/teacher/:id" element={<TeacherDetails />} />
-
+        <Route path="/favorites" element={<FavoritesPage />} />
 
         <Route path="/admin" element={<ProtectedRoute element={<AdminDashboard />} />}>
           <Route index element={<TotalDashboard />} /> 

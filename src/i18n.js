@@ -112,6 +112,9 @@ i18n
                     "Admin Dashboard":"Admin Dashboard",
                     "Image":"Image",
                     "Actions":"Actions",
+                    //Favorite pages
+                    "Your Favorite Teachers":"Your Favorite Teachers",
+                    "No favorite teachers added yet.":"No favorite teachers added yet.",
 
 
                     "about": {
@@ -263,6 +266,9 @@ i18n
                     "Admin Dashboard":"لوحه التحكم ",
                     "Actions":"التحكم",
                     "Image":"الصورة",
+                    //Favorite pages
+                    "Your Favorite Teachers":"المعلمين المفضلة لديك",
+                    "No favorite teachers added yet.":"لم تتم إضافة أي مدرسين مفضلين حتى الآن.",
 
 
                     "about": {
