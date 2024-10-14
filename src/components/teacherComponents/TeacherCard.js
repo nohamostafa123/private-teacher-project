@@ -1,26 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import { FaUserAlt, FaStar, FaRegStar, FaGraduationCap, FaHeart, FaRegHeart, FaFlag, FaHome, FaBriefcase, FaPhoneAlt, FaCamera } from 'react-icons/fa';
 import { useNavigate, Link } from 'react-router-dom';
+import { Modal, Button } from 'react-bootstrap'; // Import Modal and Button from react-bootstrap
 import './component styles/TeacherCard.css';
+
+const countryCodes = {
+    Egypt: '+20',
+    'Saudi Arabia': '+966',
+    UAE: '+971',
+    Jordan: '+962',
+    Iraq: '+964',
+    Lebanon: '+961',
+    Tunisia: '+216',
+    Algeria: '+213',
+    Morocco: '+212',
+    Oman: '+968',
+    Kuwait: '+965',
+    Qatar: '+974',
+    Bahrain: '+973',
+    Yemen: '+967',
+};
 
 const TeacherCard = ({ teacher }) => {
     const [isFavorited, setIsFavorited] = useState(false);
     const [image, setImage] = useState(teacher.image || 'https://via.placeholder.com/150?text=No+Image');
+    const [countryCode, setCountryCode] = useState(countryCodes[teacher.country] || '+20');
+    const [phoneNumber, setPhoneNumber] = useState(teacher.phone || '');
+    const [message, setMessage] = useState('');
+    const [showModal, setShowModal] = useState(false); // State for modal visibility
     const charLimit = 10;
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Load saved favorites from localStorage
         const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
         setIsFavorited(savedFavorites.includes(teacher._id));
 
-        // Load saved image from localStorage if available
         const savedImage = localStorage.getItem(`teacherImage_${teacher._id}`);
         if (savedImage) {
             setImage(savedImage);
         }
 
-        // Save essential teacher data in localStorage (only if different)
         const selectedTeacherData = {
             id: teacher._id,
             firstName: teacher.first_name,
@@ -41,7 +60,7 @@ const TeacherCard = ({ teacher }) => {
             : [...savedFavorites, teacher._id];
 
         localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-        setIsFavorited(!isFavorited); // Toggle favorite state
+        setIsFavorited(!isFavorited);
     };
 
     const renderStars = (rating) => {
@@ -57,7 +76,7 @@ const TeacherCard = ({ teacher }) => {
     };
 
     const handleNavigate = () => {
-        navigate(`/teacher/${teacher._id}`); // Navigate to the teacher details page
+        navigate(`/teacher/${teacher._id}`);
     };
 
     const handleImageUpload = (event) => {
@@ -66,11 +85,39 @@ const TeacherCard = ({ teacher }) => {
             const reader = new FileReader();
             reader.onloadend = () => {
                 setImage(reader.result);
-                // Save the image in localStorage for persistence
                 localStorage.setItem(`teacherImage_${teacher._id}`, reader.result);
             };
             reader.readAsDataURL(file);
         }
+    };
+
+    const handleWhatsApp = (messageContent) => {
+        const fullPhoneNumber = `${countryCode}${phoneNumber.replace(/\s+/g, '')}`;
+        const whatsappUrl = `https://wa.me/${fullPhoneNumber}?text=${encodeURIComponent(messageContent)}`;
+        window.open(whatsappUrl, '_blank');
+    };
+
+    const handleSendMessage = () => {
+        if (message.trim()) {
+            handleWhatsApp(message);
+            setMessage('');
+        } else {
+            alert('Please enter a message to send.');
+        }
+    };
+
+    const handleContactWithoutMessage = () => {
+        handleWhatsApp('');
+    };
+
+    // Function to handle the modal open
+    const handleContactClick = () => {
+        setShowModal(true);
+    };
+
+    // Function to close the modal
+    const handleCloseModal = () => {
+        setShowModal(false);
     };
 
     return (
@@ -98,20 +145,25 @@ const TeacherCard = ({ teacher }) => {
                 <div className="col-md-12">
                     <div className="card-body">
                         <h5 className="teacher-title">
-                            <h5>{`${teacher.teacher_desc.substring(0, charLimit)}`}
-                                <span className='text-muted'>...</span>
-                                <Link
-                                    to={`/teacher/${teacher._id}`}
-                                    onClick={handleNavigate} style={{ cursor: 'pointer' }}
-                                    className="read-more-link text-muted ms-2 fw-4 fs-6"
-                                >
-                                    Read More
-                                </Link>
-                            </h5>
+                            {`${teacher.teacher_desc.substring(0, charLimit)}`}
+                            <span className='text-muted'>...</span>
+                            <Link
+                                to={`/teacher/${teacher._id}`}
+                                onClick={handleNavigate}
+                                className="read-more-link text-muted ms-2 fw-4 fs-6"
+                            >
+                                Read More
+                            </Link>
                         </h5>
-                        <h6 className="text-muted teacher-account">
-                            <FaUserAlt className="me-2 teacher-account" /> {`${teacher.first_name} ${teacher.last_name}`}
-                        </h6>
+                        <Link
+                            to={`/teacher/${teacher._id}`}
+                            onClick={handleNavigate}
+                            className="teacher-account-link text-decoration-none"
+                        >
+                            <h6 className="text-muted teacher-account">
+                                <FaUserAlt className="me-2 teacher-account" /> {`${teacher.first_name} ${teacher.last_name}`}
+                            </h6>
+                        </Link>
 
                         <div className="teacher-rating mb-3">
                             {renderStars(teacher.rating || 0)}
@@ -127,10 +179,36 @@ const TeacherCard = ({ teacher }) => {
                             <p className="mb-1"><FaHome className="me-2" /> Status: {teacher.onlineStatus}</p>
                         </div>
 
-                        <button className="mb-2 contact-button" onClick={handleNavigate} style={{ cursor: 'pointer' }}>Contact</button>
+                        <div className="mb-3">
+                            <button className="contact-button" onClick={handleContactClick} style={{ cursor: 'pointer' }}>Contact</button>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            {/* Modal for sending messages */}
+            <Modal show={showModal} onHide={handleCloseModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Contact Teacher</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <input
+                        type="text"
+                        placeholder="Write a message..."
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        className="form-control mb-2"
+                    />
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleSendMessage}>
+                        Send Message
+                    </Button>
+                    <Button variant="primary" onClick={handleContactWithoutMessage}>
+                        Just Contact
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 };
