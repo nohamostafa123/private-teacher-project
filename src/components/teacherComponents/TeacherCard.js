@@ -204,9 +204,7 @@ const TeacherCard = ({ teacher }) => {
                     />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseModal}>
-                        Close
-                    </Button>
+                    
                     <Button variant="primary" onClick={handleSendMessage}>
                         Send Message
                     </Button>

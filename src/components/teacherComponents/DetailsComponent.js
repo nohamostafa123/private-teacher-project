@@ -72,6 +72,10 @@ useEffect(() => {
                 icon: 'success',
                 title: 'Success',
                 text:  'Rating submitted successfully!',
+                customClass: {
+                confirmButton: 'custom-confirm', // Apply custom class to confirm button
+              },
+
             });
     
             // Update teacher details in the UI if rating is updated
@@ -200,8 +204,9 @@ useEffect(() => {
                             <FaUserAlt className="icon" />
                             <span>التقييم</span>
                             <span className="stat-value">{rating || 'N/A'}</span>
-
-                            <div className="mb-3">
+                        </div>
+                            <div className="stat-item">
+                            <FaUserAlt className="icon" />
                                 <span>قيم هذا المُعلم </span>
                                 {[1, 2, 3, 4, 5].map((value) => (
                                     <FaStar
@@ -212,7 +217,7 @@ useEffect(() => {
                                     />
                                 ))}
                             </div>
-                        </div>
+                    
                         <div className="stat-item">
                             <FaBriefcase className="icon" />
                             <span>سنوات الخبرة</span>
@@ -243,7 +248,6 @@ useEffect(() => {
                     )}
                     {activeProfileTab === 'options' && (
                         <div className="profile-options-content">
-                            <h3>الحالة</h3>
                             <p>{teacher.onlineStatus ? 'Online' : 'Offline'}</p>
                         </div>
                     )}
