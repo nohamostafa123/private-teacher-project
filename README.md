@@ -54,7 +54,7 @@ The platform uses JWT for secure login and registration, ensuring the privacy of
 <h3>And to install our backend server</h3>
 <pre>
   1-Clone the repository:
-  git clone https://github.com/RahmaYahiaa/private-teacher-backend.git
+  git clone https://github.com/nohamostafa123/private-teacher-backend.git
 </pre>
 <pre>
   2-Navigate to the project directory:
